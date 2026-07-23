@@ -120,14 +120,12 @@ export function Adopurr() {
         </Reveal>
         <ol className="adopurr-flow">
           {flowSteps.map((item, i) => (
-            <Reveal key={item.step} delay={i * 70}>
-              <li>
-                <span className="adopurr-flow-step">{item.step}</span>
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </div>
-              </li>
+            <Reveal key={item.step} delay={i * 70} as="li">
+              <span className="adopurr-flow-step">{item.step}</span>
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </div>
             </Reveal>
           ))}
         </ol>
@@ -191,11 +189,9 @@ export function Adopurr() {
         </Reveal>
         <ul className="adopurr-year-plan">
           {yearPlan.map((item, i) => (
-            <Reveal key={item.title} delay={i * 50}>
-              <li>
-                <strong>{item.title}</strong>
-                <p>{item.detail}</p>
-              </li>
+            <Reveal key={item.title} delay={i * 50} as="li">
+              <strong>{item.title}</strong>
+              <p>{item.detail}</p>
             </Reveal>
           ))}
         </ul>

@@ -36,9 +36,9 @@ export const chapter = {
   about:
     "Lebanon Trail FCCLA brings Family and Consumer Sciences to life beyond the classroom. Members lead projects, compete across Texas, serve the community, and grow into the kind of leaders families and workplaces need.",
   joinCta:
-    "Want in? Reach out to an officer or advisor, check that you are in an eligible FCS course, and start building skills that last.",
+    "Ready to join? Complete the membership form, pay dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
   eligibilityNote:
-    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Message any officer and we will help you check.",
+    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Stop by MF A206 or KC A204 and we will help you check.",
   social: {
     instagram: "",
     twitter: "https://twitter.com/LTHSfccla",
@@ -46,6 +46,45 @@ export const chapter = {
   contactEmail: "fiszerm@friscoisd.org",
   joinFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSfmf-ZQcecbttkW0AgrN8pgaiVQTpIhbxUN3j_9OI4YJnLSMA/viewform",
+  classrooms: [
+    {
+      code: "MF A206",
+      advisor: "Ms. Michelle Fiszer",
+      email: "fiszerm@friscoisd.org",
+      note: "Questions, forms, and dues drop-off",
+    },
+    {
+      code: "KC A204",
+      advisor: "Ms. Kelli Cashion",
+      email: "cashionk@friscoisd.org",
+      note: "Questions, forms, and dues drop-off",
+    },
+  ],
+  membership: {
+    duesAmount: "Confirm exact 2026-27 total in MF A206 or KC A204",
+    duesDetails:
+      "Dues cover Texas & National FCCLA affiliation (state rate is typically $18) plus any Lebanon Trail chapter fee for local activities. Advisors post the exact dollar amount and deadline in the FCS classrooms each year.",
+    paymentHow:
+      "Pay by cash or check. Make checks payable to Lebanon Trail High School and write “FCCLA dues” in the memo line.",
+    paymentWhere:
+      "Turn dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
+    formOnline:
+      "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors — no print needed for the digital form.",
+    formReturn:
+      "Need a paper form instead? Ask in MF A206 or KC A204, complete it, and return it to either classroom with your dues payment.",
+    expectations: [
+      "Come to chapter meetings listed on the calendar",
+      "Participate in service projects, including Adopurr shelter and advocacy work",
+      "Help with fundraising that supports chapter projects and animal welfare",
+      "If you want to compete or attend State Fair, earn at least 50 approved points in the member portal",
+    ],
+    steps: [
+      "Check that you have taken (or are taking) an eligible FCS course",
+      "Complete the membership form online or on paper",
+      "Pay dues in MF A206 or KC A204",
+      "Show up to meetings, service, and fundraising — then track points in the portal",
+    ],
+  },
   calendar: {
     embedSrc:
       "https://calendar.google.com/calendar/embed?src=c_3256d0abc2a80c0cb79e6947c1ea7c084add498878449b83856b5c9cc1a5cd6e%40group.calendar.google.com&ctz=America%2FChicago",
@@ -168,6 +207,7 @@ export type Person = {
   focus?: string
   email?: string
   photo?: string
+  classroom?: string
 }
 
 export const officers: Person[] = [
@@ -245,18 +285,20 @@ export const advisors: Person[] = [
   {
     name: "Michelle Fiszer",
     role: "Chapter Advisor",
-    bio: "",
-    focus: "FCS Teacher",
+    bio: "Stop by MF A206 for membership questions, forms, and dues.",
+    focus: "FCS Teacher · MF A206",
     email: "fiszerm@friscoisd.org",
     photo: "/team/advisor-michelle-fiszer.png",
+    classroom: "MF A206",
   },
   {
     name: "Kelli Cashion",
     role: "Chapter Advisor",
-    bio: "",
-    focus: "FCS Teacher",
+    bio: "Stop by KC A204 for membership questions, forms, and dues.",
+    focus: "FCS Teacher · KC A204",
     email: "cashionk@friscoisd.org",
     photo: "/team/advisor-kelli-cashion.png",
+    classroom: "KC A204",
   },
 ]
 
@@ -713,12 +755,17 @@ export const importantDetails = [
   {
     label: "Who can join",
     value:
-      "Students who take (or have taken) an eligible FCS course at any point in their high school years. If you are unsure, contact any officer to confirm eligibility.",
+      "Students who take (or have taken) an eligible FCS course at any point in their high school years. If you are unsure, stop by MF A206 or KC A204 to confirm eligibility.",
   },
   {
     label: "What we do",
     value:
-      "STAR Events, community service (led by Adopurr in 2026-27), leadership conferences, and chapter projects with family at the center.",
+      "STAR Events, community service (led by Adopurr in 2026-27), leadership conferences, fundraising, and chapter projects with family at the center.",
+  },
+  {
+    label: "Where to find us",
+    value:
+      "Advisor classrooms: MF A206 (Ms. Fiszer) and KC A204 (Ms. Cashion). Bring membership questions, forms, and dues there.",
   },
   {
     label: "Our marks",
@@ -736,17 +783,27 @@ export const faqs = [
   {
     question: "Who can join Lebanon Trail FCCLA?",
     answer:
-      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, ask any officer or advisor.",
+      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, ask any officer or stop by MF A206 or KC A204.",
   },
   {
     question: "How do I join?",
     answer:
-      "Fill out the chapter membership form on the Join page, then talk with an officer or advisor about meetings and dues.",
+      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay dues in MF A206 or KC A204, and plan to attend meetings, service projects, and fundraising.",
   },
   {
-    question: "Are there dues?",
+    question: "How much are dues and how do I pay?",
     answer:
-      "Yes. Membership dues help cover affiliation and chapter activities. Ask an advisor or officer for the current amount and payment details for this year.",
+      "Confirm the exact 2026-27 total in MF A206 or KC A204. Dues cover Texas & National affiliation (typically $18 statewide) plus any chapter fee. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to Ms. Fiszer (MF A206) or Ms. Cashion (KC A204).",
+  },
+  {
+    question: "What is expected of members?",
+    answer:
+      "Come to chapter meetings, participate in service projects (including Adopurr), and help with fundraising. Members who want to compete or attend State Fair also need at least 50 approved points in the member portal.",
+  },
+  {
+    question: "Where do I submit forms?",
+    answer:
+      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204 with your dues payment.",
   },
   {
     question: "Do I have to compete?",

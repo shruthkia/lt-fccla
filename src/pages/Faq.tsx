@@ -15,7 +15,8 @@ export function Faq() {
             <span className="text-red">answers.</span>
           </h1>
           <p className="page-lede">
-            Quick answers about joining, dues, eligibility, and competing at Lebanon Trail FCCLA.
+            Quick answers about joining, dues, payment, classrooms, eligibility, and competing at
+            Lebanon Trail FCCLA.
           </p>
         </Reveal>
       </header>

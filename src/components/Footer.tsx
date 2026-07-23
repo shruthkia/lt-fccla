@@ -32,12 +32,17 @@ export function Footer() {
         </div>
         <div className="footer-aside">
           <p>
+            Questions? Visit <strong>MF A206</strong> (Ms. Fiszer) or <strong>KC A204</strong>{" "}
+            (Ms. Cashion), or email{" "}
+            <a href={`mailto:${chapter.contactEmail}`}>{chapter.contactEmail}</a>.
+          </p>
+          <p>
             Affiliated with{" "}
-            <a href="https://www.texasfccla.org/" target="_blank" rel="noreferrer">
+            <a href="https://www.texasfccla.org/" target="_blank" rel="noopener noreferrer">
               Texas FCCLA
             </a>{" "}
             and{" "}
-            <a href="https://fcclainc.org/" target="_blank" rel="noreferrer">
+            <a href="https://fcclainc.org/" target="_blank" rel="noopener noreferrer">
               FCCLA National
             </a>
             .

@@ -72,8 +72,9 @@ const pageIndex: SearchEntry[] = [
   {
     title: "Join",
     path: "/join",
-    blurb: "Membership info and join form.",
-    keywords: "join membership dues apply form eligible courses",
+    blurb: "Membership form, dues, payment, expectations, and advisor classrooms.",
+    keywords:
+      "join membership dues pay form eligible courses meetings service fundraising A206 A204 fiszer cashion",
   },
   {
     title: "Program of Work",

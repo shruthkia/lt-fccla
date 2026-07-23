@@ -15,7 +15,8 @@ export function Officers() {
             <span className="text-red">behind the Trail.</span>
           </h1>
           <p className="page-lede">
-            Officers run the day to day. Advisors are here if you need them. Reach out anytime.
+            Officers run the day to day. Advisors are in MF A206 (Ms. Fiszer) and KC A204 (Ms.
+            Cashion) if you need them. Reach out anytime.
           </p>
         </Reveal>
       </header>
@@ -42,8 +43,8 @@ export function Officers() {
             <p className="eyebrow">Student officers</p>
             <h2>The 2025-26 officer team</h2>
             <p className="section-note">
-              Have a question about joining or competing? Reach out to an officer or advisor by
-              email.
+              Have a question about joining, dues, or competing? Email an officer or stop by MF A206
+              / KC A204.
             </p>
           </div>
         </Reveal>
