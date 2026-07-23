@@ -18,7 +18,7 @@ export function Gallery() {
             <span className="text-red">on the Trail.</span>
           </h1>
           <p className="page-lede">
-            Moments from meetings, competitions, service, and Rosie energy around campus.
+            Moments from meetings, competitions, service, and chapter life on campus.
           </p>
         </Reveal>
       </header>
