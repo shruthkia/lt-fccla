@@ -2327,6 +2327,24 @@ html[data-theme="dark"] .hero-bg::after {
   max-width: none;
 }
 
+.join-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.join-page .band-soft .join-panel .section-head,
+.join-page .band-soft .join-panel .course-grid,
+.join-page .band-soft .join-panel .join-steps,
+.join-page .band-soft .join-panel .join-actions,
+.join-page .band-soft .join-panel .join-embed,
+.join-page .band-soft .join-panel .join-embed-fallback {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
 .join-stack {
   display: grid;
   gap: 1rem;
@@ -2484,9 +2502,22 @@ html[data-theme="dark"] .hero-bg::after {
 
 .join-page .course-grid {
   list-style: none;
-  margin: 1.25rem 0 0;
+  margin: 1.25rem auto 0;
   padding: 0;
   width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.join-page .course-pill {
+  display: flex;
+  align-items: center;
+  min-height: 3.25rem;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .person-classroom {
