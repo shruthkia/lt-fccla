@@ -37,6 +37,7 @@ import {
 import {
   fetchAllClaimsForAdmin,
   fetchMemberPointSummary,
+  formatPointsError,
   reviewPointClaim,
 } from "../lib/points"
 import { formatPostDate } from "../lib/markdown"
@@ -740,7 +741,7 @@ function PointsPanel() {
       setSummary(memberSummary)
       setMessage(null)
     } catch (err: unknown) {
-      setMessage(err instanceof Error ? err.message : "Could not load point claims.")
+      setMessage(formatPointsError(err))
     }
   }
 
@@ -750,16 +751,15 @@ function PointsPanel() {
 
   async function onReview(id: string, status: "approved" | "denied") {
     const supabase = getSupabase()
-    if (!supabase) return
     const {
       data: { user },
-    } = await supabase.auth.getUser()
+    } = supabase ? await supabase.auth.getUser() : { data: { user: null } }
     try {
       await reviewPointClaim(id, status, user?.id ?? null)
       setMessage(status === "approved" ? "Claim approved." : "Claim denied.")
       await reload()
     } catch (err: unknown) {
-      setMessage(err instanceof Error ? err.message : "Could not update claim.")
+      setMessage(formatPointsError(err))
     }
   }
 
