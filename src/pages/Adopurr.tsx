@@ -3,30 +3,34 @@ import { Reveal } from "../components/Reveal"
 import { POINTS_TO_COMPETE } from "../data/points"
 import { useSite } from "../hooks/useSiteContent"
 
-const shelters = [
+const shelterExamples = [
   {
-    name: "Dallas Animal Services",
-    blurb: "Monthly care shifts, kennel enrichment, and adoption-floor support in Dallas.",
+    name: "Any local shelter or rescue",
+    blurb:
+      "Pick a place that works for you — Dallas Animal Services, Operation Kindness, Frisco, Plano, or another shelter/rescue nearby.",
   },
   {
-    name: "Operation Kindness",
-    blurb: "Hands-on volunteering with a North Texas rescue powerhouse focused on forever homes.",
+    name: "Proof required",
+    blurb:
+      "A supervisor must sign your hours form, or you need an email from the shelter confirming you worked. No proof, no credit.",
   },
   {
-    name: "Frisco Animal Shelter",
-    blurb: "Local shelter visits for Trail members earning service hours close to campus.",
+    name: "Service hours + points",
+    blurb:
+      "Verified shifts count toward school service hours and portal points once officers approve your claim.",
   },
   {
-    name: "Plano Animal Shelter",
-    blurb: "Partner visits for animal care promotion, supply support, and adoption advocacy.",
+    name: "Log it in the portal",
+    blurb:
+      "Submit the shelter visit activity (or a custom activity) with the shelter name and how you verified the shift.",
   },
 ]
 
 const flowSteps = [
   {
     step: "01",
-    title: "Volunteer locally",
-    copy: "Sign up for monthly shelter visits at DAS, Operation Kindness, Frisco, or Plano. Care for animals, tidy spaces, and help adoption days. Hours count toward school service requirements.",
+    title: "Volunteer at a shelter",
+    copy: "Serve at any animal shelter or rescue that will take you. Bring a hours form for a supervisor signature, or get an email confirming you worked. Care for animals, help adoption days, and earn service hours.",
   },
   {
     step: "02",
@@ -41,7 +45,7 @@ const flowSteps = [
   {
     step: "04",
     title: "Earn your points",
-    copy: `Log activities in the member portal. Officers and advisors approve honest claims. You need at least ${POINTS_TO_COMPETE} approved points to compete and to go to the State Fair.`,
+    copy: `Log activities in the member portal — including custom work if it is not on the list. Officers and advisors approve claims that meet chapter standards. You need at least ${POINTS_TO_COMPETE} approved points to compete and to go to the State Fair.`,
   },
 ]
 
@@ -57,7 +61,7 @@ const yearPlan = [
   {
     title: "Adopurr Service Project",
     detail:
-      "Monthly shelter visits · animal care promotion · flyers, social posts, and cold emails for funds · sterilization fundraising · DAS, Plano Animal Shelter, and Operation Kindness · dog toy making event.",
+      "Monthly shelter visits at any verified shelter/rescue · animal care promotion · flyers, social posts, and cold emails for funds · sterilization fundraising · dog toy making event.",
   },
   {
     title: "State Fair",
@@ -134,20 +138,21 @@ export function Adopurr() {
       <section className="section adopurr-section">
         <Reveal>
           <div className="section-head">
-            <p className="eyebrow">Partner shelters</p>
-            <h2>Where we volunteer.</h2>
+            <p className="eyebrow">Shelter volunteering</p>
+            <h2>Any shelter works — with proof.</h2>
             <p className="section-lede">
-              Members can earn service hours while supporting animals in care across North Texas.
+              We do not lock you to one partner. Volunteer where you can, then bring a supervisor
+              signature or a confirmation email so officers can approve your hours and points.
             </p>
           </div>
         </Reveal>
         <div className="adopurr-shelter-grid">
-          {shelters.map((shelter, i) => (
-            <Reveal key={shelter.name} delay={i * 60}>
+          {shelterExamples.map((item, i) => (
+            <Reveal key={item.name} delay={i * 60}>
               <article className="adopurr-shelter">
                 <PawMark />
-                <h3>{shelter.name}</h3>
-                <p>{shelter.blurb}</p>
+                <h3>{item.name}</h3>
+                <p>{item.blurb}</p>
               </article>
             </Reveal>
           ))}
@@ -170,7 +175,7 @@ export function Adopurr() {
           <ul className="adopurr-advocacy-list">
             <li>Raise money for sterilization and shelter medical needs</li>
             <li>Flyers, social posts, and cold emails that ask clearly and kindly</li>
-            <li>Monthly animal-care promotion tied to real shelter partners</li>
+            <li>Monthly animal-care promotion with verified shelter volunteering</li>
             <li>Recognitions for members who lead with consistency, not just vibes</li>
           </ul>
         </Reveal>

@@ -18,6 +18,9 @@ export function Portal() {
   const [activities, setActivities] = useState<PointActivity[]>([])
   const [selected, setSelected] = useState<string[]>([])
   const [note, setNote] = useState("")
+  const [customLabel, setCustomLabel] = useState("")
+  const [customPoints, setCustomPoints] = useState("5")
+  const [customNote, setCustomNote] = useState("")
   const [claims, setClaims] = useState<PointClaim[]>([])
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
@@ -44,6 +47,8 @@ export function Portal() {
     .filter((c) => c.status === "pending")
     .reduce((sum, c) => sum + c.points, 0)
   const eligible = isEligibleForCompete(approved)
+  const hasCustom = customLabel.trim().length > 0
+  const canSubmit = selected.length > 0 || hasCustom
 
   async function lookupClaims(memberName: string) {
     setError(null)
@@ -87,11 +92,23 @@ export function Portal() {
         activityIds: selected,
         note,
         activities,
+        custom: hasCustom
+          ? {
+              label: customLabel,
+              points: Number(customPoints),
+              note: customNote,
+            }
+          : null,
       })
       localStorage.setItem(NAME_KEY, name.trim())
       setSelected([])
       setNote("")
-      setMessage("Submitted for officer/advisor approval. Points count after they approve.")
+      setCustomLabel("")
+      setCustomPoints("5")
+      setCustomNote("")
+      setMessage(
+        "Submitted for officer/advisor approval. Custom activities are reviewed against chapter standards before points count.",
+      )
       await lookupClaims(name)
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Could not submit.")
@@ -111,9 +128,9 @@ export function Portal() {
             <span className="text-red">tracker.</span>
           </h1>
           <p className="page-lede">
-            Type your name, check the activities you completed, and submit for officer approval.
-            You need at least {POINTS_TO_COMPETE} approved points to compete and to go to the State
-            Fair.
+            Type your name, check the activities you completed, or add a custom activity for review.
+            Shelter shifts need a supervisor signature or confirmation email. You need at least{" "}
+            {POINTS_TO_COMPETE} approved points to compete and to go to the State Fair.
           </p>
         </Reveal>
       </header>
@@ -181,8 +198,9 @@ export function Portal() {
               <p className="eyebrow">Log activity</p>
               <h2>What did you complete?</h2>
               <p className="portal-help">
-                Only check activities you actually did. Officers and advisors approve before points
-                count.
+                Check listed activities you actually did, or add something custom below. Officers
+                and advisors approve before points count — shelter work needs a signed form or
+                confirmation email.
               </p>
 
               {loading && <p className="blog-loading">Loading activities…</p>}
@@ -211,20 +229,56 @@ export function Portal() {
                 })}
               </ul>
 
+              <div className="portal-custom">
+                <p className="eyebrow">Not on the list?</p>
+                <h3>Add a custom activity</h3>
+                <p className="portal-help">
+                  Describe what you did and request points. Officers approve only if it matches
+                  chapter standards.
+                </p>
+                <label>
+                  Custom activity name
+                  <input
+                    value={customLabel}
+                    onChange={(e) => setCustomLabel(e.target.value)}
+                    placeholder="e.g. Foster transport for a local rescue"
+                  />
+                </label>
+                <label>
+                  Points requested (1–25)
+                  <input
+                    type="number"
+                    min={1}
+                    max={25}
+                    value={customPoints}
+                    onChange={(e) => setCustomPoints(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Why it should count / proof notes
+                  <textarea
+                    rows={3}
+                    value={customNote}
+                    onChange={(e) => setCustomNote(e.target.value)}
+                    placeholder="Supervisor name, email confirmation, date, and what you did"
+                  />
+                </label>
+              </div>
+
               <label>
-                Optional note for officers
+                Shared note for officers (optional)
                 <textarea
                   rows={3}
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder="Date, shelter name, or what you helped with"
+                  placeholder="Date, shelter name, or extra context for checked activities"
                 />
               </label>
 
               {error && <p className="blog-form-error">{error}</p>}
               {message && <p className="blog-admin-message">{message}</p>}
 
-              <button type="submit" className="btn btn-primary" disabled={busy || selected.length === 0}>
+              <button type="submit" className="btn btn-primary" disabled={busy || !canSubmit}>
                 {busy ? "Submitting…" : "Submit for approval"}
               </button>
             </form>
@@ -244,8 +298,13 @@ export function Portal() {
                 {claims.map((claim) => (
                   <li key={claim.id} className={`status-${claim.status}`}>
                     <div>
-                      <strong>{claim.activity_label}</strong>
-                      <span>+{claim.points} pts · {claim.status}</span>
+                      <strong>
+                        {claim.activity_label}
+                        {claim.activity_key === "custom" ? " · custom" : ""}
+                      </strong>
+                      <span>
+                        +{claim.points} pts · {claim.status}
+                      </span>
                       {claim.note && <p>{claim.note}</p>}
                     </div>
                     <time>{new Date(claim.created_at).toLocaleDateString()}</time>
@@ -253,7 +312,7 @@ export function Portal() {
                 ))}
               </ul>
               <div className="inline-cta portal-cta">
-                <p>See the full Adopurr flow, shelters, and year plan.</p>
+                <p>See the full Adopurr flow and year plan.</p>
                 <Link to="/adopurr" className="btn btn-ghost">
                   Open Adopurr
                 </Link>

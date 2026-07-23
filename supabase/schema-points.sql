@@ -89,7 +89,7 @@ values
   (
     'shelter-visit',
     'Shelter visit / animal care shift',
-    'Volunteer at Dallas Animal Services, Operation Kindness, Frisco Animal Shelter, or Plano Animal Shelter.',
+    'Volunteer at any animal shelter or rescue. Needs a supervisor signature or confirmation email that you worked.',
     10,
     'service',
     1

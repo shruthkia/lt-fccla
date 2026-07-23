@@ -36,7 +36,6 @@ const navItems: NavItem[] = [
       { to: "/blog", label: "Blog" },
     ],
   },
-  { to: "/portal", label: "Portal" },
   { to: "/about", label: "About" },
   {
     to: "/faq",
@@ -58,6 +57,31 @@ function NavDropdown({
 }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<number | null>(null)
+
+  function clearCloseTimer() {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }
+
+  function openMenu() {
+    clearCloseTimer()
+    setOpen(true)
+  }
+
+  function scheduleClose() {
+    clearCloseTimer()
+    closeTimer.current = window.setTimeout(() => {
+      setOpen(false)
+      closeTimer.current = null
+    }, 320)
+  }
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -85,15 +109,18 @@ function NavDropdown({
     <div
       className={`nav-dropdown ${open ? "is-open" : ""}`}
       ref={ref}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
     >
       {isMore ? (
         <button
           type="button"
           className="nav-dropdown-trigger"
           aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            clearCloseTimer()
+            setOpen((v) => !v)
+          }}
         >
           {item.label}
           <span aria-hidden="true">▾</span>
@@ -104,6 +131,7 @@ function NavDropdown({
             to={item.to}
             className={({ isActive }) => (isActive ? "is-active" : undefined)}
             onClick={() => {
+              clearCloseTimer()
               setOpen(false)
               onNavigate()
             }}
@@ -115,7 +143,10 @@ function NavDropdown({
             className="nav-dropdown-caret"
             aria-label={`${item.label} menu`}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              clearCloseTimer()
+              setOpen((v) => !v)
+            }}
           >
             <span aria-hidden="true">▾</span>
           </button>
@@ -130,6 +161,7 @@ function NavDropdown({
             role="menuitem"
             className={({ isActive }) => (isActive ? "is-active" : undefined)}
             onClick={() => {
+              clearCloseTimer()
               setOpen(false)
               onNavigate()
             }}
@@ -211,6 +243,9 @@ export function Nav() {
             <Link to="/join" className="nav-cta nav-cta-login" onClick={closeMenu}>
               Join
             </Link>
+            <Link to="/portal" className="nav-cta nav-cta-login" onClick={closeMenu}>
+              Portal
+            </Link>
             <Link to="/admin" className="nav-cta nav-cta-login" onClick={closeMenu}>
               Officer login
             </Link>
@@ -228,6 +263,9 @@ export function Nav() {
         <div className="nav-tools">
           <Link to="/join" className="nav-cta nav-cta-login nav-cta-desktop">
             Join
+          </Link>
+          <Link to="/portal" className="nav-cta nav-cta-login nav-cta-desktop">
+            Portal
           </Link>
           <Link to="/admin" className="nav-cta nav-cta-login nav-cta-desktop">
             Officer login

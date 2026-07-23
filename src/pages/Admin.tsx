@@ -788,7 +788,8 @@ function PointsPanel() {
       </div>
       <p className="portal-help">
         Members need {POINTS_TO_COMPETE}+ approved points to compete and attend State Fair. Approve
-        only activities they actually completed.
+        only activities they actually completed. Custom claims should match chapter standards;
+        shelter visits need a supervisor signature or confirmation email.
       </p>
       {message && <p className="blog-admin-message">{message}</p>}
 
@@ -815,6 +816,7 @@ function PointsPanel() {
               </p>
               <h3>
                 {claim.member_name} · {claim.activity_label}
+                {claim.activity_key === "custom" ? " (custom)" : ""}
               </h3>
               {claim.note && <p>{claim.note}</p>}
             </div>

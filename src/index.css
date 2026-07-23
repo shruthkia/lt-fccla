@@ -1,7 +1,7 @@
 :root {
   --red: #e10600;
-  --red-deep: #b10500;
-  --red-text: #b10500;
+  --red-deep: #c40500;
+  --red-text: #e10600;
   --ink: #121212;
   --ink-soft: #2a2a2a;
   --paper: #f3f1ec;
@@ -36,7 +36,7 @@ html[data-theme="dark"] {
   --inverse: #000000;
   --inverse-text: #f5f5f5;
   --shadow-soft: rgba(0, 0, 0, 0.55);
-  --red-text: #ff7a72;
+  --red-text: #ff4d45;
   color-scheme: dark;
 }
 
@@ -330,7 +330,7 @@ main {
 
 .nav-dropdown-panel {
   position: absolute;
-  top: calc(100% + 0.35rem);
+  top: calc(100% + 0.15rem);
   left: 50%;
   transform: translateX(-50%) translateY(6px);
   min-width: 15rem;
@@ -348,6 +348,15 @@ main {
     transform 0.18s ease,
     visibility 0.18s ease;
   z-index: 70;
+}
+
+.nav-dropdown-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1rem;
+  height: 1rem;
 }
 
 .nav-dropdown:hover .nav-dropdown-panel,
@@ -378,7 +387,7 @@ main {
 
 .nav-links {
   display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   align-items: center;
   width: 100%;
   min-width: 0;
@@ -519,19 +528,19 @@ main {
 }
 
 .btn-primary {
-  background: #8f0400;
+  background: var(--red);
   color: #ffffff;
-  box-shadow: inset 0 0 0 1px #8f0400;
+  box-shadow: none;
 }
 
 .btn-primary:hover {
   background: var(--red-deep);
-  box-shadow: inset 0 0 0 1px var(--red-deep);
+  box-shadow: none;
 }
 
 .hero .btn-primary {
-  background: #7a0300;
-  box-shadow: inset 0 0 0 1px #7a0300;
+  background: var(--red);
+  box-shadow: none;
 }
 
 .btn-ghost {
@@ -576,10 +585,10 @@ main {
 /* Hero */
 .hero {
   position: relative;
-  min-height: calc(100vh - var(--nav-h));
+  min-height: auto;
   display: grid;
   align-items: end;
-  padding: 2rem 1.25rem 3rem;
+  padding: 2.5rem 1.25rem 2.75rem;
   overflow: hidden;
 }
 
@@ -1975,8 +1984,8 @@ html[data-theme="dark"] .hero-bg::after {
 
   .hero {
     min-height: auto;
-    padding-top: 3rem;
-    padding-bottom: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
   }
 }
 
@@ -2795,7 +2804,7 @@ html[data-theme="dark"] .symbol-swatch {
 .adopurr-page {
   --adopurr-ink: #1c1412;
   --adopurr-blush: #f7e8df;
-  --adopurr-coral: #e85d4c;
+  --adopurr-coral: var(--red);
   --adopurr-sage: #6f8f7a;
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cellipse fill='%231c1412' cx='10' cy='8' rx='3.2' ry='4'/%3E%3Cellipse fill='%231c1412' cx='16' cy='5.5' rx='3.2' ry='4'/%3E%3Cellipse fill='%231c1412' cx='22' cy='8' rx='3.2' ry='4'/%3E%3Cellipse fill='%231c1412' cx='7.5' cy='14' rx='2.8' ry='3.5'/%3E%3Cellipse fill='%231c1412' cx='24.5' cy='14' rx='2.8' ry='3.5'/%3E%3Cpath fill='%231c1412' d='M16 12c-5 0-9 4-9 8 0 3 2.5 5 6 5h6c3.5 0 6-2 6-5 0-4-4-8-9-8z'/%3E%3C/svg%3E") 8 8, auto;
 }
@@ -3134,6 +3143,18 @@ html[data-theme="dark"] .adopurr-hero {
 .portal-history {
   display: grid;
   gap: 0.85rem;
+}
+
+.portal-custom {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px dashed var(--line);
+  background: color-mix(in srgb, var(--red) 4%, var(--surface));
+}
+
+.portal-custom h3 {
+  font-size: 1.2rem;
 }
 
 .portal-help {

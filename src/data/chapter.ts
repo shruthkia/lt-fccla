@@ -715,7 +715,7 @@ export const communityService: ServiceEvent[] = [
     date: "Ongoing 2026-27",
     status: "ongoing",
     description:
-      "Volunteer at Dallas Animal Services, Operation Kindness, Frisco Animal Shelter, and Plano Animal Shelter for care shifts and adoption-floor support. Service hours available.",
+      "Volunteer at any local animal shelter or rescue for care shifts and adoption-floor support. Bring a supervisor signature or confirmation email. Service hours available.",
     impact: "Direct animal care + service hours",
   },
   {

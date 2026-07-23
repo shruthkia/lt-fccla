@@ -109,13 +109,26 @@ export async function submitPointClaims(input: {
   activityIds: string[]
   note?: string
   activities: PointActivity[]
+  custom?: {
+    label: string
+    points: number
+    note?: string
+  } | null
 }) {
   const member_name = normalizeMemberName(input.memberName)
   if (!member_name) throw new Error("Enter your name.")
-  if (input.activityIds.length === 0) throw new Error("Select at least one activity.")
 
   const selected = input.activities.filter((a) => input.activityIds.includes(a.id))
-  if (selected.length === 0) throw new Error("Select at least one valid activity.")
+  const customLabel = input.custom?.label.trim() ?? ""
+  const customPoints = Math.round(input.custom?.points ?? 0)
+  const hasCustom = Boolean(customLabel)
+
+  if (selected.length === 0 && !hasCustom) {
+    throw new Error("Select an activity or add a custom one.")
+  }
+  if (hasCustom && (customPoints < 1 || customPoints > 25)) {
+    throw new Error("Custom activities need 1–25 points requested.")
+  }
 
   if (!isSupabaseConfigured) {
     throw new Error(
@@ -124,15 +137,33 @@ export async function submitPointClaims(input: {
   }
 
   const supabase = requireClient()
-  const payload = selected.map((activity) => ({
-    member_name,
-    activity_id: activity.id,
-    activity_key: activity.key,
-    activity_label: activity.label,
-    points: activity.points,
-    note: input.note?.trim() ?? "",
-    status: "pending" as const,
-  }))
+  const sharedNote = input.note?.trim() ?? ""
+  const payload = [
+    ...selected.map((activity) => ({
+      member_name,
+      activity_id: activity.id,
+      activity_key: activity.key,
+      activity_label: activity.label,
+      points: activity.points,
+      note: sharedNote,
+      status: "pending" as const,
+    })),
+    ...(hasCustom
+      ? [
+          {
+            member_name,
+            activity_id: "custom",
+            activity_key: "custom",
+            activity_label: customLabel,
+            points: customPoints,
+            note: [sharedNote, input.custom?.note?.trim()]
+              .filter(Boolean)
+              .join(sharedNote && input.custom?.note?.trim() ? "\n" : ""),
+            status: "pending" as const,
+          },
+        ]
+      : []),
+  ]
 
   const { data, error } = await supabase.from("point_claims").insert(payload).select("*")
   if (error) throw error
