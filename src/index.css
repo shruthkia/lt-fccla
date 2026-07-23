@@ -1,7 +1,8 @@
 :root {
   --red: #e10600;
   --red-deep: #c40500;
-  --red-text: #e10600;
+  /* Darker than brand fill so small red text meets WCAG AA on paper. */
+  --red-text: #c40500;
   --ink: #121212;
   --ink-soft: #2a2a2a;
   --paper: #f3f1ec;
@@ -531,6 +532,8 @@ main {
   background: var(--red);
   color: #ffffff;
   box-shadow: none;
+  /* Keep opaque so contrast stays stable over hero gradients/animations. */
+  isolation: isolate;
 }
 
 .btn-primary:hover {
@@ -727,6 +730,24 @@ html[data-theme="dark"] .hero-bg::after {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-in,
+  .delay-1,
+  .delay-2,
+  .delay-3,
+  .delay-4 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(36px);
@@ -813,7 +834,7 @@ html[data-theme="dark"] .hero-bg::after {
 
 .band-title em {
   font-style: normal;
-  color: var(--red);
+  color: var(--red-text);
 }
 
 .band-copy {

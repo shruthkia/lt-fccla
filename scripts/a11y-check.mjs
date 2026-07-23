@@ -12,6 +12,7 @@ async function main() {
   })
   const page = await browser.newPage()
   await page.setViewport({ width: 1280, height: 800 })
+  await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }])
 
   let seriousCount = 0
   const summary = []
