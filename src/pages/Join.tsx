@@ -7,7 +7,7 @@ export function Join() {
   const { membership, classrooms } = chapter
 
   return (
-    <>
+    <div className="join-page">
       <header className="page-hero">
         <Reveal>
           <p className="eyebrow">Membership</p>
@@ -89,8 +89,10 @@ export function Join() {
           <div className="section-head">
             <p className="eyebrow">Forms</p>
             <h2 id="join-forms-heading">Complete and submit</h2>
-            <p className="section-note">{membership.formOnline}</p>
-            <p className="section-note">{membership.formReturn}</p>
+            <div className="join-stack">
+              <p className="section-note">{membership.formOnline}</p>
+              <p className="section-note">{membership.formReturn}</p>
+            </div>
           </div>
           <div className="join-actions">
             <a
@@ -185,6 +187,6 @@ export function Join() {
           ))}
         </ul>
       </section>
-    </>
+    </div>
   )
 }
