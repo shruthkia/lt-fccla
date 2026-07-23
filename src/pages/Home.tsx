@@ -31,7 +31,7 @@ export function Home() {
             <Link to="/join" className="btn btn-primary">
               Join the chapter
             </Link>
-            <Link to="/community-service" className="btn btn-ghost">
+            <Link to="/adopurr" className="btn btn-ghost">
               Meet Adopurr
             </Link>
           </div>
@@ -118,7 +118,7 @@ export function Home() {
               <h2>{coreServiceProject.title}</h2>
               <p>{coreServiceProject.description}</p>
               <p className="service-impact">{coreServiceProject.impact}</p>
-              <Link to="/community-service" className="btn btn-primary">
+              <Link to="/adopurr" className="btn btn-primary">
                 Explore Adopurr
               </Link>
             </div>
@@ -142,6 +142,16 @@ export function Home() {
         <div className="feature-grid">
           {[
             {
+              to: "/adopurr",
+              title: "Adopurr",
+              copy: "Animal welfare, shelter volunteering, advocacy, and points toward State Fair.",
+            },
+            {
+              to: "/portal",
+              title: "Member Portal",
+              copy: "Log activities, track approved points, and check compete eligibility.",
+            },
+            {
               to: "/officers",
               title: "Officers & Advisors",
               copy: "Meet the officers and advisors who keep Trail FCCLA moving.",
@@ -164,7 +174,7 @@ export function Home() {
           ].map((item, i) => (
             <Reveal key={item.to} delay={i * 80}>
               <Link to={item.to} className="feature-link">
-                <span className="feature-index">0{i + 1}</span>
+                <span className="feature-index">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{item.title}</h3>
                 <p>{item.copy}</p>
                 <span className="feature-go">Open →</span>

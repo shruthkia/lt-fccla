@@ -34,6 +34,18 @@ const pageIndex: SearchEntry[] = [
     keywords: "service adopurr animals community",
   },
   {
+    title: "Adopurr",
+    path: "/adopurr",
+    blurb: "Shelter volunteering, advocacy, fundraisers, and the 2026-27 animal welfare project.",
+    keywords: "adopurr cats shelter dallas operation kindness frisco plano sterilization points",
+  },
+  {
+    title: "Member Portal",
+    path: "/portal",
+    blurb: "Log activities and track points for competing and State Fair.",
+    keywords: "portal points tracker compete state fair approval members",
+  },
+  {
     title: "Calendar",
     path: "/calendar",
     blurb: "Chapter and school dates.",
@@ -172,7 +184,7 @@ export function buildSearchIndex(bundle: SiteBundle = defaultSiteBundle): Search
 
   entries.push({
     title: bundle.coreServiceProject.title,
-    path: "/community-service",
+    path: "/adopurr",
     blurb: bundle.coreServiceProject.description,
     keywords: `${bundle.coreServiceProject.title} ${bundle.coreServiceProject.description} adopurr service`,
   })

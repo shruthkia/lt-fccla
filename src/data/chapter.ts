@@ -662,35 +662,50 @@ export const coreServiceProject: ServiceEvent = {
   featured: true,
   image: "/projects/adopurr.png",
   description:
-    "Adopurr is Lebanon Trail FCCLA's core community service project for 2026-27. Focused on animal welfare, Adopurr promotes responsible care and helps more animals find loving adoptive homes.",
-  impact: "Animal welfare, care education, and adoption advocacy",
+    "Adopurr is Lebanon Trail FCCLA's core community service project for 2026-27. Members volunteer at local shelters, raise funds for sterilization, advocate for animal welfare, and earn points toward competing and the State Fair.",
+  impact: "Shelter service hours, adoption advocacy, and animal welfare fundraising",
 }
 
 export const communityService: ServiceEvent[] = [
   coreServiceProject,
   {
-    title: "Adopurr Awareness Drive",
-    date: "Fall 2026",
-    status: "upcoming",
+    title: "Monthly Shelter Visits",
+    date: "Ongoing 2026-27",
+    status: "ongoing",
     description:
-      "Campus and community outreach to teach pet care basics and spotlight local adoption opportunities.",
-    impact: "Education + adoption visibility",
+      "Volunteer at Dallas Animal Services, Operation Kindness, Frisco Animal Shelter, and Plano Animal Shelter for care shifts and adoption-floor support. Service hours available.",
+    impact: "Direct animal care + service hours",
   },
   {
-    title: "Supply & Care Collection",
+    title: "Adopurr Outreach & Fundraising",
+    date: "Fall–Spring 2026-27",
+    status: "upcoming",
+    description:
+      "Flyers, social posts, and cold emails to raise money for sterilization and promote animal care. Bruiser's Bill energy for North Texas shelters.",
+    impact: "Funds + community awareness",
+  },
+  {
+    title: "Dog Toy Making Event",
     date: "Winter 2026-27",
     status: "upcoming",
     description:
-      "Collect food, toys, blankets, and care items for partner shelters and rescue groups supporting Adopurr.",
-    impact: "Direct support for animals in care",
+      "Chapter work night building enrichment toys for shelter dogs partnered with Adopurr.",
+    impact: "Hands-on support for animals in care",
   },
   {
-    title: "Adoption Story Spotlight",
-    date: "Spring 2027",
+    title: "Emerson × Lebanon Trail Connect",
+    date: "2026-27",
     status: "upcoming",
     description:
-      "Share success stories from Adopurr partners to inspire families to adopt and care well for pets.",
-    impact: "Community storytelling for animal welfare",
+      "Cross-chapter collaboration focused on cultural promotion and connecting FCCLA communities.",
+    impact: "Campus + chapter partnership",
+  },
+  {
+    title: "Plano × Lebanon Trail Stand Up",
+    date: "2026-27",
+    status: "upcoming",
+    description: "Joint Stand Up chapter project with Plano FCCLA.",
+    impact: "Collaborative service leadership",
   },
 ]
 
@@ -741,7 +756,12 @@ export const faqs = [
   {
     question: "What is Adopurr?",
     answer:
-      "Adopurr is our 2026-27 core service project focused on animal welfare, responsible care, and adoption advocacy.",
+      "Adopurr is our 2026-27 core service project focused on animal welfare, shelter volunteering, sterilization fundraising, and adoption advocacy. See the Adopurr page for the full flow and partner shelters.",
+  },
+  {
+    question: "How do points work for competing and State Fair?",
+    answer:
+      "Members log completed activities in the Member Portal. Officers and advisors approve honest claims. You need at least 50 approved points to compete and to attend the State Fair.",
   },
   {
     question: "When does the chapter meet?",

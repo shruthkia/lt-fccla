@@ -8,6 +8,8 @@ type NavItem = {
   to: string
   label: string
   end?: boolean
+  /** Shown as the first dropdown row so the parent page stays discoverable. */
+  overviewLabel?: string
   children?: NavChild[]
 }
 
@@ -17,24 +19,30 @@ const navItems: NavItem[] = [
   {
     to: "/community-service",
     label: "Service",
-    children: [{ to: "/program-of-work", label: "Program of Work" }],
+    overviewLabel: "Service overview",
+    children: [
+      { to: "/adopurr", label: "Adopurr" },
+      { to: "/program-of-work", label: "Program of Work" },
+    ],
   },
   { to: "/calendar", label: "Calendar" },
   { to: "/competitive-events", label: "Compete" },
   {
     to: "/records",
     label: "Records",
+    overviewLabel: "Records board",
     children: [
       { to: "/gallery", label: "Gallery" },
       { to: "/blog", label: "Blog" },
     ],
   },
+  { to: "/portal", label: "Portal" },
   { to: "/about", label: "About" },
   {
     to: "/faq",
     label: "More",
+    overviewLabel: "FAQ",
     children: [
-      { to: "/faq", label: "FAQ" },
       { to: "/search", label: "Search" },
       { to: "/sitemap", label: "Sitemap" },
     ],
@@ -68,6 +76,10 @@ function NavDropdown({
   }, [open])
 
   const isMore = item.label === "More"
+  const panelItems: NavChild[] = [
+    { to: item.to, label: item.overviewLabel ?? item.label },
+    ...(item.children ?? []),
+  ]
 
   return (
     <div
@@ -110,10 +122,11 @@ function NavDropdown({
         </span>
       )}
       <div className="nav-dropdown-panel" role="menu">
-        {item.children!.map((child) => (
+        {panelItems.map((child) => (
           <NavLink
-            key={child.to}
+            key={`${child.to}-${child.label}`}
             to={child.to}
+            end={child.to === item.to}
             role="menuitem"
             className={({ isActive }) => (isActive ? "is-active" : undefined)}
             onClick={() => {
@@ -153,7 +166,7 @@ export function Nav() {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header className={`site-nav ${scrolled ? "is-scrolled" : ""}`}>
+    <header className={`site-nav ${scrolled || open ? "is-scrolled" : ""} ${open ? "is-menu-open" : ""}`}>
       <div className="nav-inner">
         <Link
           to="/"
@@ -234,8 +247,11 @@ export function Nav() {
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <span />
-            <span />
+            <span className="nav-toggle-label">{open ? "Close" : "Menu"}</span>
+            <span className="nav-toggle-bars" aria-hidden="true">
+              <span />
+              <span />
+            </span>
           </button>
         </div>
       </div>

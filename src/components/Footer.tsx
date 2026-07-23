@@ -19,6 +19,8 @@ export function Footer() {
         </div>
         <div className="footer-links">
           <Link to="/officers">Officers & Advisors</Link>
+          <Link to="/adopurr">Adopurr</Link>
+          <Link to="/portal">Member Portal</Link>
           <Link to="/gallery">Gallery</Link>
           <Link to="/program-of-work">Program of Work</Link>
           <Link to="/join">Join</Link>

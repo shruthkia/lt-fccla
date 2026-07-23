@@ -60,6 +60,32 @@ export type SiteContentRow = {
   updated_by: string | null
 }
 
+export type PointActivityRow = {
+  id: string
+  key: string
+  label: string
+  description: string
+  points: number
+  category: "service" | "advocacy" | "chapter" | "leadership"
+  sort_order: number
+  active: boolean
+  created_at: string
+}
+
+export type PointClaimRow = {
+  id: string
+  member_name: string
+  activity_id: string
+  activity_key: string
+  activity_label: string
+  points: number
+  note: string
+  status: "pending" | "approved" | "denied"
+  reviewed_by: string | null
+  reviewed_at: string | null
+  created_at: string
+}
+
 export type PostInsert = {
   title: string
   slug: string
@@ -131,6 +157,54 @@ export type Database = {
           data?: unknown
           updated_by?: string | null
         }
+        Relationships: []
+      }
+      point_activities: {
+        Row: PointActivityRow
+        Insert: {
+          key: string
+          label: string
+          description?: string
+          points: number
+          category?: PointActivityRow["category"]
+          sort_order?: number
+          active?: boolean
+        }
+        Update: Partial<{
+          key: string
+          label: string
+          description: string
+          points: number
+          category: PointActivityRow["category"]
+          sort_order: number
+          active: boolean
+        }>
+        Relationships: []
+      }
+      point_claims: {
+        Row: PointClaimRow
+        Insert: {
+          member_name: string
+          activity_id: string
+          activity_key: string
+          activity_label: string
+          points: number
+          note?: string
+          status?: PointClaimRow["status"]
+          reviewed_by?: string | null
+          reviewed_at?: string | null
+        }
+        Update: Partial<{
+          member_name: string
+          activity_id: string
+          activity_key: string
+          activity_label: string
+          points: number
+          note: string
+          status: PointClaimRow["status"]
+          reviewed_by: string | null
+          reviewed_at: string | null
+        }>
         Relationships: []
       }
     }

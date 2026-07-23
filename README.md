@@ -21,6 +21,8 @@ Update names, service events, competition records, FAQ copy, and contact info in
 - Officers & Advisors
 - Competitive Events
 - Community Service
+- Adopurr (core animal welfare project + year plan)
+- Member Portal (activity checkboxes + points tracker)
 - Gallery (Supabase Storage uploads)
 - Calendar (Google Calendar embed)
 - Records
@@ -30,7 +32,7 @@ Update names, service events, competition records, FAQ copy, and contact info in
 - FAQ
 - About
 - Search + Sitemap
-- Admin workspace at `/admin` (blog, gallery, Program of Work)
+- Admin workspace at `/admin` (blog, gallery, Program of Work, point approvals)
 
 ## Official FCCLA logo
 
@@ -63,6 +65,7 @@ In the Supabase **SQL Editor**, run in order:
 1. `supabase/schema.sql` (profiles, posts, admin helper)
 2. `supabase/schema-extensions.sql` (gallery, program of work, storage)
 3. `supabase/schema-site-content.sql` (editable chapter/team/FAQ/records/etc.)
+4. `supabase/schema-points.sql` (member portal activities + point claim approvals)
 
 ### 3. Create an admin user
 
@@ -78,7 +81,7 @@ where email = 'your-admin@example.com';
 ### 4. Edit the whole site
 
 1. Visit `/admin` and sign in.
-2. Use the tabs to edit chapter identity, team, FAQ, service, courses, records, milestones, compete tracks, pathways, blog, gallery, and Program of Work.
+2. Use the tabs to edit chapter identity, team, FAQ, service, courses, records, milestones, compete tracks, pathways, blog, gallery, Program of Work, and member point approvals.
 3. Click **Save section** after each change. Public pages update from Supabase (with built-in defaults until a section is saved).
 
 `/blog/admin` redirects to `/admin`.

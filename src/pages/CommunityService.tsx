@@ -31,6 +31,9 @@ export function CommunityService() {
               <h2>{coreServiceProject.title}</h2>
               <p>{coreServiceProject.description}</p>
               <p className="service-impact">{coreServiceProject.impact}</p>
+              <Link to="/adopurr" className="btn btn-primary">
+                Open full Adopurr page
+              </Link>
             </div>
             <div className="adopurr-media">
               <img

@@ -16,7 +16,8 @@ export function CompetitiveEvents() {
           </h1>
           <p className="page-lede">
             STAR Events, Online STAR, FCSAs, Skill Demos, Spotlight on Projects, Knowledge Bowl,
-            Virtual Business Challenge, Challenge Tests, and National Program Awards.
+            Virtual Business Challenge, Challenge Tests, and National Program Awards. Members need
+            50+ approved portal points to compete and to attend the State Fair.
           </p>
         </Reveal>
       </header>
@@ -52,8 +53,14 @@ export function CompetitiveEvents() {
 
         <Reveal>
           <div className="inline-cta">
-            <p>Curious who placed last year? Check the records board.</p>
-            <Link to="/records" className="btn btn-primary">
+            <p>
+              Track points in the member portal, then review who placed last year on the records
+              board.
+            </p>
+            <Link to="/portal" className="btn btn-primary">
+              Open member portal
+            </Link>
+            <Link to="/records" className="btn btn-ghost">
               See our records
             </Link>
           </div>
