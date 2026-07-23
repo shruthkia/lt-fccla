@@ -29,7 +29,7 @@ export const yearPlanEvents: YearPlanItem[] = [
   },
   {
     title: "State Fair",
-    timeframe: "Fall",
+    timeframe: "October (tentative)",
     description:
       "Chapter trip and competition pathway. Members need enough approved portal points to compete and attend.",
     status: "planned",
