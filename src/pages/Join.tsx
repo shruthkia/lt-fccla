@@ -3,7 +3,7 @@ import { Reveal } from "../components/Reveal"
 import { useSite } from "../hooks/useSiteContent"
 
 export function Join() {
-  const { chapter, eligibleCourses, advisors } = useSite()
+  const { chapter, eligibleCourses } = useSite()
   const { membership, classrooms } = chapter
 
   return (
@@ -140,7 +140,8 @@ export function Join() {
             <p className="eyebrow">Questions</p>
             <h2 id="join-contact-heading">Contact & classrooms</h2>
             <p className="section-note">
-              Stop by during the school day, or email an advisor. Bring forms and dues to either room.
+              Email an officer with questions, or visit an advisor in MF A206 or KC A204 at any
+              point in the day if they are available. Bring forms and dues to either room.
             </p>
           </div>
         </Reveal>
@@ -151,25 +152,20 @@ export function Join() {
                 <p className="eyebrow">{room.code}</p>
                 <h3>{room.advisor}</h3>
                 <p>{room.note}</p>
-                <a className="text-link" href={`mailto:${room.email}`}>
-                  {room.email}
-                </a>
               </article>
             </Reveal>
           ))}
           <Reveal delay={120}>
             <article className="join-contact-card">
-              <p className="eyebrow">Chapter email</p>
-              <h3>Primary contact</h3>
-              <p>General membership and chapter questions.</p>
-              <a className="text-link" href={`mailto:${chapter.contactEmail}`}>
-                {chapter.contactEmail}
-              </a>
-              {advisors[1]?.email && (
-                <a className="text-link" href={`mailto:${advisors[1].email}`}>
-                  {advisors[1].email}
-                </a>
-              )}
+              <p className="eyebrow">Best first step</p>
+              <h3>Email an officer</h3>
+              <p>
+                Officers can answer membership questions quickly. Visit advisors in MF A206 or KC
+                A204 at any point in the day if they are available.
+              </p>
+              <Link to="/officers" className="text-link">
+                Meet officers and get emails
+              </Link>
             </article>
           </Reveal>
         </div>

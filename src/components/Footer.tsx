@@ -32,9 +32,8 @@ export function Footer() {
         </div>
         <div className="footer-aside">
           <p>
-            Questions? Visit <strong>MF A206</strong> (Ms. Fiszer) or <strong>KC A204</strong>{" "}
-            (Ms. Cashion), or email{" "}
-            <a href={`mailto:${chapter.contactEmail}`}>{chapter.contactEmail}</a>.
+            Questions? Email an officer, or visit <strong>MF A206</strong> /{" "}
+            <strong>KC A204</strong> at any point in the day if an advisor is available.
           </p>
           <p>
             Affiliated with{" "}

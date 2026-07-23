@@ -135,11 +135,12 @@ export function About() {
         <Reveal>
           <p className="eligibility-aside">
             Already took one of these classes earlier in high school? You can still be in FCCLA.
-            Unsure? Message any officer on the{" "}
+            Unsure? Email an officer on the{" "}
             <Link to="/officers" className="text-link">
               Team page
             </Link>
-            .
+            , or visit an advisor in MF A206 or KC A204 at any point in the day if they are
+            available.
           </p>
         </Reveal>
       </section>

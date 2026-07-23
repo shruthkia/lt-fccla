@@ -34,7 +34,10 @@ export function Faq() {
         </div>
         <Reveal>
           <div className="inline-cta">
-            <p>Still unsure? Talk with an officer or advisor.</p>
+            <p>
+              Still unsure? Email an officer, or visit an advisor at any point in the day if they
+              are available.
+            </p>
             <Link to="/join" className="btn btn-primary">
               Join the chapter
             </Link>

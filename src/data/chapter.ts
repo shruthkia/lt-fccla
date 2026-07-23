@@ -38,7 +38,7 @@ export const chapter = {
   joinCta:
     "Ready to join? Complete the membership form, pay $55 dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
   eligibilityNote:
-    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Stop by MF A206 or KC A204 and we will help you check.",
+    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   social: {
     instagram: "",
     twitter: "https://twitter.com/LTHSfccla",
@@ -51,13 +51,13 @@ export const chapter = {
       code: "MF A206",
       advisor: "Ms. Michelle Fiszer",
       email: "fiszerm@friscoisd.org",
-      note: "Questions, forms, and dues drop-off",
+      note: "Visit when available for questions, forms, and dues drop-off",
     },
     {
       code: "KC A204",
       advisor: "Ms. Kelli Cashion",
       email: "cashionk@friscoisd.org",
-      note: "Questions, forms, and dues drop-off",
+      note: "Visit when available for questions, forms, and dues drop-off",
     },
   ],
   membership: {
@@ -285,7 +285,7 @@ export const advisors: Person[] = [
   {
     name: "Michelle Fiszer",
     role: "Chapter Advisor",
-    bio: "Stop by MF A206 for membership questions, forms, and dues.",
+    bio: "Visit MF A206 when available for membership questions, forms, and dues.",
     focus: "FCS Teacher · MF A206",
     email: "fiszerm@friscoisd.org",
     photo: "/team/advisor-michelle-fiszer.png",
@@ -294,7 +294,7 @@ export const advisors: Person[] = [
   {
     name: "Kelli Cashion",
     role: "Chapter Advisor",
-    bio: "Stop by KC A204 for membership questions, forms, and dues.",
+    bio: "Visit KC A204 when available for membership questions, forms, and dues.",
     focus: "FCS Teacher · KC A204",
     email: "cashionk@friscoisd.org",
     photo: "/team/advisor-kelli-cashion.png",
@@ -765,7 +765,7 @@ export const importantDetails = [
   {
     label: "Where to find us",
     value:
-      "Advisor classrooms: MF A206 (Ms. Fiszer) and KC A204 (Ms. Cashion). Bring membership questions, forms, and dues there.",
+      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Bring membership forms and dues to either room.",
   },
   {
     label: "Our marks",
@@ -783,7 +783,7 @@ export const faqs = [
   {
     question: "Who can join Lebanon Trail FCCLA?",
     answer:
-      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, ask any officer or stop by MF A206 or KC A204.",
+      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   },
   {
     question: "How do I join?",
@@ -793,7 +793,7 @@ export const faqs = [
   {
     question: "How much are dues and how do I pay?",
     answer:
-      "Membership dues are $55 for the 2026-27 year. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to Ms. Fiszer (MF A206) or Ms. Cashion (KC A204).",
+      "Membership dues are $55 for the 2026-27 year. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to MF A206 or KC A204 when an advisor is available.",
   },
   {
     question: "What is expected of members?",
@@ -803,7 +803,12 @@ export const faqs = [
   {
     question: "Where do I submit forms?",
     answer:
-      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204 with your dues payment.",
+      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204 with your dues payment when an advisor is available.",
+  },
+  {
+    question: "Who should I contact with questions?",
+    answer:
+      "Email an officer from the Officers page, or visit Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 at any point in the day if they are available.",
   },
   {
     question: "Do I have to compete?",
