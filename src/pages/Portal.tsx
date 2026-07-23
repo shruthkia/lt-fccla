@@ -8,7 +8,7 @@ import {
   type PointActivity,
   type PointClaim,
 } from "../data/points"
-import { fetchClaimsByMember, fetchPointActivities, submitPointClaims } from "../lib/points"
+import { fetchClaimsByMember, fetchPointActivities, formatPointsError, submitPointClaims } from "../lib/points"
 import { isSupabaseConfigured } from "../lib/supabase"
 
 const NAME_KEY = "lt-fccla-portal-name"
@@ -60,7 +60,7 @@ export function Portal() {
     } catch (err: unknown) {
       setClaims([])
       setLookedUp(true)
-      setError(err instanceof Error ? err.message : "Could not load points.")
+      setError(formatPointsError(err))
     }
   }
 
@@ -87,7 +87,7 @@ export function Portal() {
     setError(null)
     setMessage(null)
     try {
-      await submitPointClaims({
+      const result = await submitPointClaims({
         memberName: name,
         activityIds: selected,
         note,
@@ -107,11 +107,12 @@ export function Portal() {
       setCustomPoints("5")
       setCustomNote("")
       setMessage(
-        "Submitted for officer/advisor approval. Custom activities are reviewed against chapter standards before points count.",
+        result.notice ??
+          "Submitted for officer/advisor approval. Custom activities are reviewed against chapter standards before points count.",
       )
       await lookupClaims(name)
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "Could not submit.")
+      setError(formatPointsError(err))
     } finally {
       setBusy(false)
     }
@@ -139,11 +140,11 @@ export function Portal() {
         {!isSupabaseConfigured && (
           <Reveal>
             <div className="blog-notice">
-              <p className="eyebrow">Setup needed</p>
-              <h2>Portal submissions need Supabase</h2>
+              <p className="eyebrow">Heads up</p>
+              <h2>Submissions save on this device for now</h2>
               <p>
-                Officers can connect the project and run <code>supabase/schema-points.sql</code>.
-                Until then, you can still review the activity list and points rules below.
+                You can still log activities. For chapter-wide officer approval, an advisor should
+                connect Supabase and run <code>supabase/schema-points.sql</code>.
               </p>
             </div>
           </Reveal>

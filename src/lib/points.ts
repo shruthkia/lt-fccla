@@ -32,6 +32,18 @@ export type PointActivityRow = {
   active: boolean
 }
 
+const LOCAL_CLAIMS_KEY = "lt-fccla-point-claims"
+
+export function formatPointsError(err: unknown): string {
+  if (err instanceof Error && err.message) return err.message
+  if (typeof err === "object" && err && "message" in err) {
+    const message = String((err as { message: unknown }).message ?? "")
+    if (message) return message
+  }
+  if (typeof err === "string" && err.trim()) return err
+  return "Something went wrong. Please try again."
+}
+
 function requireClient() {
   const supabase = getSupabase()
   if (!supabase) throw new Error("Member portal needs a Supabase connection.")
@@ -67,6 +79,37 @@ function mapClaim(row: PointClaimRow): PointClaim {
   }
 }
 
+function readLocalClaims(): PointClaim[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_CLAIMS_KEY)
+    if (!raw) return []
+    const parsed = JSON.parse(raw) as PointClaim[]
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+function writeLocalClaims(claims: PointClaim[]) {
+  localStorage.setItem(LOCAL_CLAIMS_KEY, JSON.stringify(claims))
+}
+
+function saveLocalClaims(newClaims: PointClaim[]) {
+  const existing = readLocalClaims()
+  writeLocalClaims([...newClaims, ...existing])
+  return newClaims
+}
+
+function isMissingTableError(err: unknown) {
+  const message = formatPointsError(err).toLowerCase()
+  return (
+    message.includes("does not exist") ||
+    message.includes("could not find the table") ||
+    message.includes("schema cache") ||
+    message.includes("point_claims")
+  )
+}
+
 export async function fetchPointActivities(): Promise<PointActivity[]> {
   if (!isSupabaseConfigured) return defaultPointActivities.filter((a) => a.active)
 
@@ -78,7 +121,6 @@ export async function fetchPointActivities(): Promise<PointActivity[]> {
     .order("sort_order", { ascending: true })
 
   if (error) {
-    // Table may not exist yet; fall back to built-in activities.
     console.warn(error.message)
     return defaultPointActivities.filter((a) => a.active)
   }
@@ -88,23 +130,45 @@ export async function fetchPointActivities(): Promise<PointActivity[]> {
   return rows.map(mapActivity)
 }
 
+function localClaimsForMember(memberName: string) {
+  const name = normalizeMemberName(memberName).toLowerCase()
+  return readLocalClaims()
+    .filter((c) => c.member_name.toLowerCase() === name)
+    .sort((a, b) => b.created_at.localeCompare(a.created_at))
+}
+
 export async function fetchClaimsByMember(memberName: string): Promise<PointClaim[]> {
   const name = normalizeMemberName(memberName)
   if (!name) return []
-  if (!isSupabaseConfigured) return []
 
-  const supabase = requireClient()
-  const { data, error } = await supabase
-    .from("point_claims")
-    .select("*")
-    .ilike("member_name", name)
-    .order("created_at", { ascending: false })
+  const local = localClaimsForMember(name)
 
-  if (error) throw error
-  return ((data ?? []) as PointClaimRow[]).map(mapClaim)
+  if (!isSupabaseConfigured) return local
+
+  try {
+    const supabase = requireClient()
+    const { data, error } = await supabase
+      .from("point_claims")
+      .select("*")
+      .ilike("member_name", name)
+      .order("created_at", { ascending: false })
+
+    if (error) {
+      if (isMissingTableError(error)) return local
+      throw new Error(formatPointsError(error))
+    }
+
+    const remote = ((data ?? []) as PointClaimRow[]).map(mapClaim)
+    const remoteIds = new Set(remote.map((c) => c.id))
+    const merged = [...remote, ...local.filter((c) => !remoteIds.has(c.id))]
+    return merged.sort((a, b) => b.created_at.localeCompare(a.created_at))
+  } catch (err) {
+    if (isMissingTableError(err)) return local
+    throw err instanceof Error ? err : new Error(formatPointsError(err))
+  }
 }
 
-export async function submitPointClaims(input: {
+function buildClaimPayload(input: {
   memberName: string
   activityIds: string[]
   note?: string
@@ -130,65 +194,155 @@ export async function submitPointClaims(input: {
     throw new Error("Custom activities need 1-25 points requested.")
   }
 
+  const sharedNote = input.note?.trim() ?? ""
+  return {
+    member_name,
+    rows: [
+      ...selected.map((activity) => ({
+        member_name,
+        activity_id: activity.id,
+        activity_key: activity.key,
+        activity_label: activity.label,
+        points: activity.points,
+        note: sharedNote,
+        status: "pending" as const,
+      })),
+      ...(hasCustom
+        ? [
+            {
+              member_name,
+              activity_id: "custom",
+              activity_key: "custom",
+              activity_label: customLabel,
+              points: customPoints,
+              note: [sharedNote, input.custom?.note?.trim()]
+                .filter(Boolean)
+                .join(sharedNote && input.custom?.note?.trim() ? "\n" : ""),
+              status: "pending" as const,
+            },
+          ]
+        : []),
+    ],
+  }
+}
+
+function toLocalClaims(
+  rows: ReturnType<typeof buildClaimPayload>["rows"],
+): PointClaim[] {
+  const now = new Date().toISOString()
+  return rows.map((row, index) => ({
+    id: `local-${Date.now()}-${index}-${Math.random().toString(36).slice(2, 8)}`,
+    member_name: row.member_name,
+    activity_id: row.activity_id,
+    activity_key: row.activity_key,
+    activity_label: row.activity_label,
+    points: row.points,
+    note: row.note,
+    status: row.status,
+    reviewed_by: null,
+    reviewed_at: null,
+    created_at: now,
+  }))
+}
+
+export type SubmitPointClaimsResult = {
+  claims: PointClaim[]
+  storage: "supabase" | "local"
+  notice?: string
+}
+
+export async function submitPointClaims(input: {
+  memberName: string
+  activityIds: string[]
+  note?: string
+  activities: PointActivity[]
+  custom?: {
+    label: string
+    points: number
+    note?: string
+  } | null
+}): Promise<SubmitPointClaimsResult> {
+  const { rows } = buildClaimPayload(input)
+
   if (!isSupabaseConfigured) {
-    throw new Error(
-      "Point submissions need Supabase. Officers can run supabase/schema-points.sql, then members can submit here.",
-    )
+    const claims = saveLocalClaims(toLocalClaims(rows))
+    return {
+      claims,
+      storage: "local",
+      notice:
+        "Saved on this device. Ask an advisor to connect Supabase and run supabase/schema-points.sql so officers can approve chapter-wide.",
+    }
   }
 
-  const supabase = requireClient()
-  const sharedNote = input.note?.trim() ?? ""
-  const payload = [
-    ...selected.map((activity) => ({
-      member_name,
-      activity_id: activity.id,
-      activity_key: activity.key,
-      activity_label: activity.label,
-      points: activity.points,
-      note: sharedNote,
-      status: "pending" as const,
-    })),
-    ...(hasCustom
-      ? [
-          {
-            member_name,
-            activity_id: "custom",
-            activity_key: "custom",
-            activity_label: customLabel,
-            points: customPoints,
-            note: [sharedNote, input.custom?.note?.trim()]
-              .filter(Boolean)
-              .join(sharedNote && input.custom?.note?.trim() ? "\n" : ""),
-            status: "pending" as const,
-          },
-        ]
-      : []),
-  ]
-
-  const { data, error } = await supabase.from("point_claims").insert(payload).select("*")
-  if (error) throw error
-  return ((data ?? []) as PointClaimRow[]).map(mapClaim)
+  try {
+    const supabase = requireClient()
+    const { data, error } = await supabase.from("point_claims").insert(rows).select("*")
+    if (error) throw error
+    return {
+      claims: ((data ?? []) as PointClaimRow[]).map(mapClaim),
+      storage: "supabase",
+    }
+  } catch (err) {
+    if (isMissingTableError(err)) {
+      const claims = saveLocalClaims(toLocalClaims(rows))
+      return {
+        claims,
+        storage: "local",
+        notice:
+          "Saved on this device because the points table is not set up yet. An advisor needs to run supabase/schema-points.sql in Supabase for officer approvals.",
+      }
+    }
+    throw new Error(formatPointsError(err))
+  }
 }
 
 export async function fetchPendingClaims(): Promise<PointClaim[]> {
-  const supabase = requireClient()
-  const { data, error } = await supabase
-    .from("point_claims")
-    .select("*")
-    .eq("status", "pending")
-    .order("created_at", { ascending: true })
-  if (error) throw error
-  return ((data ?? []) as PointClaimRow[]).map(mapClaim)
+  const localPending = readLocalClaims().filter((c) => c.status === "pending")
+  if (!isSupabaseConfigured) return localPending
+
+  try {
+    const supabase = requireClient()
+    const { data, error } = await supabase
+      .from("point_claims")
+      .select("*")
+      .eq("status", "pending")
+      .order("created_at", { ascending: true })
+    if (error) {
+      if (isMissingTableError(error)) return localPending
+      throw new Error(formatPointsError(error))
+    }
+    const remote = ((data ?? []) as PointClaimRow[]).map(mapClaim)
+    const remoteIds = new Set(remote.map((c) => c.id))
+    return [...remote, ...localPending.filter((c) => !remoteIds.has(c.id))]
+  } catch (err) {
+    if (isMissingTableError(err)) return localPending
+    throw new Error(formatPointsError(err))
+  }
 }
 
 export async function fetchAllClaimsForAdmin(): Promise<PointClaim[]> {
-  const supabase = requireClient()
-  const { data, error } = await supabase
-    .from("point_claims")
-    .select("*")
-    .order("created_at", { ascending: false })
-  if (error) throw error
-  return ((data ?? []) as PointClaimRow[]).map(mapClaim)
+  const local = readLocalClaims()
+  if (!isSupabaseConfigured) return local
+
+  try {
+    const supabase = requireClient()
+    const { data, error } = await supabase
+      .from("point_claims")
+      .select("*")
+      .order("created_at", { ascending: false })
+    if (error) {
+      if (isMissingTableError(error)) return local
+      throw new Error(formatPointsError(error))
+    }
+    const remote = ((data ?? []) as PointClaimRow[]).map(mapClaim)
+    const remoteIds = new Set(remote.map((c) => c.id))
+    return [...remote, ...local.filter((c) => !remoteIds.has(c.id))].sort((a, b) =>
+      b.created_at.localeCompare(a.created_at),
+    )
+  } catch (err) {
+    if (isMissingTableError(err)) return local
+    throw new Error(formatPointsError(err))
+  }
 }
 
 export async function reviewPointClaim(
@@ -196,6 +350,23 @@ export async function reviewPointClaim(
   status: Extract<PointClaimStatus, "approved" | "denied">,
   reviewerId: string | null,
 ) {
+  if (id.startsWith("local-")) {
+    const next = readLocalClaims().map((claim) =>
+      claim.id === id
+        ? {
+            ...claim,
+            status,
+            reviewed_by: reviewerId,
+            reviewed_at: new Date().toISOString(),
+          }
+        : claim,
+    )
+    writeLocalClaims(next)
+    const updated = next.find((c) => c.id === id)
+    if (!updated) throw new Error("Could not find that local claim.")
+    return updated
+  }
+
   const supabase = requireClient()
   const { data, error } = await supabase
     .from("point_claims")
@@ -207,7 +378,7 @@ export async function reviewPointClaim(
     .eq("id", id)
     .select("*")
     .single()
-  if (error) throw error
+  if (error) throw new Error(formatPointsError(error))
   return mapClaim(data as PointClaimRow)
 }
 
@@ -227,5 +398,7 @@ export async function fetchMemberPointSummary(): Promise<
     if (claim.status === "pending") row.pending += claim.points
     map.set(key, row)
   }
-  return [...map.values()].sort((a, b) => b.approved - a.approved || a.member_name.localeCompare(b.member_name))
+  return [...map.values()].sort(
+    (a, b) => b.approved - a.approved || a.member_name.localeCompare(b.member_name),
+  )
 }
