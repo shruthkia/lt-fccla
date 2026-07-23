@@ -40,7 +40,7 @@ export const chapter = {
   eligibilityNote:
     "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   social: {
-    instagram: "",
+    instagram: "https://www.instagram.com/lthsfccla/",
     twitter: "https://twitter.com/LTHSfccla",
   },
   contactEmail: "fiszerm@friscoisd.org",
@@ -765,7 +765,7 @@ export const importantDetails = [
   {
     label: "Where to find us",
     value:
-      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Bring membership forms and dues to either room.",
+      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Bring membership forms and dues to either room. Follow us on Instagram @lthsfccla.",
   },
   {
     label: "Our marks",

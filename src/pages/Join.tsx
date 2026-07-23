@@ -168,6 +168,24 @@ export function Join() {
               </Link>
             </article>
           </Reveal>
+          {chapter.social.instagram && (
+            <Reveal delay={180}>
+              <article className="join-contact-card">
+                <p className="eyebrow">Social</p>
+                <h3>Instagram</h3>
+                <p>Updates, events, and chapter life on @lthsfccla.</p>
+                <a
+                  className="text-link"
+                  href={chapter.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Follow @lthsfccla
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </article>
+            </Reveal>
+          )}
         </div>
       </section>
 

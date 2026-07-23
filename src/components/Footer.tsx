@@ -35,6 +35,33 @@ export function Footer() {
             Questions? Email an officer, or visit <strong>MF A206</strong> /{" "}
             <strong>KC A204</strong> at any point in the day if an advisor is available.
           </p>
+          {(chapter.social.instagram || chapter.social.twitter) && (
+            <p className="footer-social">
+              Follow us
+              {chapter.social.instagram && (
+                <>
+                  {" · "}
+                  <a
+                    href={chapter.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram @lthsfccla
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </>
+              )}
+              {chapter.social.twitter && (
+                <>
+                  {" · "}
+                  <a href={chapter.social.twitter} target="_blank" rel="noopener noreferrer">
+                    X / Twitter @LTHSfccla
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </>
+              )}
+            </p>
+          )}
           <p>
             Affiliated with{" "}
             <a href="https://www.texasfccla.org/" target="_blank" rel="noopener noreferrer">

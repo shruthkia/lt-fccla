@@ -1775,6 +1775,10 @@ html[data-theme="dark"] .hero-bg::after {
   font-size: 0.95rem;
 }
 
+.footer-social {
+  margin: 0.65rem 0;
+}
+
 .footer-links {
   display: flex;
   flex-direction: column;
