@@ -36,7 +36,7 @@ export const chapter = {
   about:
     "Lebanon Trail FCCLA brings Family and Consumer Sciences to life beyond the classroom. Members lead projects, compete across Texas, serve the community, and grow into the kind of leaders families and workplaces need.",
   joinCta:
-    "Ready to join? Complete the membership form, pay dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
+    "Ready to join? Complete the membership form, pay $55 dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
   eligibilityNote:
     "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Stop by MF A206 or KC A204 and we will help you check.",
   social: {
@@ -61,13 +61,13 @@ export const chapter = {
     },
   ],
   membership: {
-    duesAmount: "Confirm exact 2026-27 total in MF A206 or KC A204",
+    duesAmount: "$55 for the 2026-27 membership year",
     duesDetails:
-      "Dues cover Texas & National FCCLA affiliation (state rate is typically $18) plus any Lebanon Trail chapter fee for local activities. Advisors post the exact dollar amount and deadline in the FCS classrooms each year.",
+      "Membership dues are $55. That covers Texas & National FCCLA affiliation plus Lebanon Trail chapter activities for the year.",
     paymentHow:
       "Pay by cash or check. Make checks payable to Lebanon Trail High School and write “FCCLA dues” in the memo line.",
     paymentWhere:
-      "Turn dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
+      "Turn your $55 dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
     formOnline:
       "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors — no print needed for the digital form.",
     formReturn:
@@ -81,7 +81,7 @@ export const chapter = {
     steps: [
       "Check that you have taken (or are taking) an eligible FCS course",
       "Complete the membership form online or on paper",
-      "Pay dues in MF A206 or KC A204",
+      "Pay $55 dues in MF A206 or KC A204",
       "Show up to meetings, service, and fundraising — then track points in the portal",
     ],
   },
@@ -788,12 +788,12 @@ export const faqs = [
   {
     question: "How do I join?",
     answer:
-      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay dues in MF A206 or KC A204, and plan to attend meetings, service projects, and fundraising.",
+      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay $55 dues in MF A206 or KC A204, and plan to attend meetings, service projects, and fundraising.",
   },
   {
     question: "How much are dues and how do I pay?",
     answer:
-      "Confirm the exact 2026-27 total in MF A206 or KC A204. Dues cover Texas & National affiliation (typically $18 statewide) plus any chapter fee. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to Ms. Fiszer (MF A206) or Ms. Cashion (KC A204).",
+      "Membership dues are $55 for the 2026-27 year. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to Ms. Fiszer (MF A206) or Ms. Cashion (KC A204).",
   },
   {
     question: "What is expected of members?",
