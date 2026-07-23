@@ -79,8 +79,9 @@ const pageIndex: SearchEntry[] = [
   {
     title: "Program of Work",
     path: "/program-of-work",
-    blurb: "Year roadmap and chapter plan.",
-    keywords: "program of work roadmap timeline year plan",
+    blurb: "Events on the Trail: collaborations, Adopurr, socials, and the year roadmap.",
+    keywords:
+      "program of work roadmap timeline year plan events emerson plano adopurr halloween christmas state fair",
   },
   {
     title: "FAQ",

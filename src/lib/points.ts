@@ -78,7 +78,7 @@ export async function fetchPointActivities(): Promise<PointActivity[]> {
     .order("sort_order", { ascending: true })
 
   if (error) {
-    // Table may not exist yet — fall back to built-in activities.
+    // Table may not exist yet; fall back to built-in activities.
     console.warn(error.message)
     return defaultPointActivities.filter((a) => a.active)
   }
@@ -127,7 +127,7 @@ export async function submitPointClaims(input: {
     throw new Error("Select an activity or add a custom one.")
   }
   if (hasCustom && (customPoints < 1 || customPoints > 25)) {
-    throw new Error("Custom activities need 1–25 points requested.")
+    throw new Error("Custom activities need 1-25 points requested.")
   }
 
   if (!isSupabaseConfigured) {

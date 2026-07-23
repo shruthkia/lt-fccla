@@ -69,7 +69,7 @@ export const chapter = {
     paymentWhere:
       "Turn your $55 dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
     formOnline:
-      "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors — no print needed for the digital form.",
+      "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors. No print needed for the digital form.",
     formReturn:
       "Need a paper form instead? Ask in MF A206 or KC A204, complete it, and return it to either classroom with your dues payment.",
     expectations: [
@@ -82,7 +82,7 @@ export const chapter = {
       "Check that you have taken (or are taking) an eligible FCS course",
       "Complete the membership form online or on paper",
       "Pay $55 dues in MF A206 or KC A204",
-      "Show up to meetings, service, and fundraising — then track points in the portal",
+      "Show up to meetings, service, and fundraising, then track points in the portal",
     ],
   },
   calendar: {
@@ -720,10 +720,10 @@ export const communityService: ServiceEvent[] = [
   },
   {
     title: "Adopurr Outreach & Fundraising",
-    date: "Fall–Spring 2026-27",
+    date: "Fall-Spring 2026-27",
     status: "upcoming",
     description:
-      "Flyers, social posts, and cold emails to raise money for sterilization and promote animal care. Bruiser's Bill energy for North Texas shelters.",
+      "Flyers, social posts, and cold emails to raise money for sterilization and promote animal care across North Texas shelters.",
     impact: "Funds + community awareness",
   },
   {

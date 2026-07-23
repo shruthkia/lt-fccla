@@ -199,7 +199,7 @@ export function Portal() {
               <h2>What did you complete?</h2>
               <p className="portal-help">
                 Check listed activities you actually did, or add something custom below. Officers
-                and advisors approve before points count — shelter work needs a signed form or
+                and advisors approve before points count. Shelter work needs a signed form or
                 confirmation email.
               </p>
 
@@ -245,7 +245,7 @@ export function Portal() {
                   />
                 </label>
                 <label>
-                  Points requested (1–25)
+                  Points requested (1-25)
                   <input
                     type="number"
                     min={1}
