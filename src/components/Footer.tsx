@@ -46,7 +46,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Instagram @lthsfccla
+                    Instagram @LEBANONTRAILFCCLA
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 </>

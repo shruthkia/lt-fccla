@@ -173,14 +173,14 @@ export function Join() {
               <article className="join-contact-card">
                 <p className="eyebrow">Social</p>
                 <h3>Instagram</h3>
-                <p>Updates, events, and chapter life on @lthsfccla.</p>
+                <p>Updates, events, and chapter life on @LEBANONTRAILFCCLA.</p>
                 <a
                   className="text-link"
                   href={chapter.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Follow @lthsfccla
+                  Follow @LEBANONTRAILFCCLA
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </article>
