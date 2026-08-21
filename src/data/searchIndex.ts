@@ -34,6 +34,18 @@ const pageIndex: SearchEntry[] = [
     keywords: "service adopurr animals community",
   },
   {
+    title: "Adopurr",
+    path: "/adopurr",
+    blurb: "Shelter volunteering, advocacy, fundraisers, and the 2026-27 animal welfare project.",
+    keywords: "adopurr cats shelter dallas operation kindness frisco plano sterilization points",
+  },
+  {
+    title: "Member Portal",
+    path: "/portal",
+    blurb: "Log activities and track points for competing and State Fair.",
+    keywords: "portal points tracker compete state fair approval members",
+  },
+  {
     title: "Calendar",
     path: "/calendar",
     blurb: "Chapter and school dates.",
@@ -60,14 +72,16 @@ const pageIndex: SearchEntry[] = [
   {
     title: "Join",
     path: "/join",
-    blurb: "Membership info and join form.",
-    keywords: "join membership dues apply form eligible courses",
+    blurb: "Membership form, dues, payment, expectations, and advisor classrooms.",
+    keywords:
+      "join membership dues pay form eligible courses meetings service fundraising A206 A204 fiszer cashion",
   },
   {
     title: "Program of Work",
     path: "/program-of-work",
-    blurb: "Year roadmap and chapter plan.",
-    keywords: "program of work roadmap timeline year plan",
+    blurb: "Events on the Trail: collaborations, Adopurr, socials, and the year roadmap.",
+    keywords:
+      "program of work roadmap timeline year plan events emerson plano adopurr halloween christmas state fair",
   },
   {
     title: "FAQ",
@@ -172,7 +186,7 @@ export function buildSearchIndex(bundle: SiteBundle = defaultSiteBundle): Search
 
   entries.push({
     title: bundle.coreServiceProject.title,
-    path: "/community-service",
+    path: "/adopurr",
     blurb: bundle.coreServiceProject.description,
     keywords: `${bundle.coreServiceProject.title} ${bundle.coreServiceProject.description} adopurr service`,
   })

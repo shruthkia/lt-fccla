@@ -137,6 +137,97 @@ export function ChapterSitePanel() {
           />
         </label>
         <label>
+          Dues amount (shown on Join)
+          <input
+            value={draft.membership.duesAmount}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, duesAmount: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Dues details
+          <textarea
+            rows={3}
+            value={draft.membership.duesDetails}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, duesDetails: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          How to pay
+          <textarea
+            rows={3}
+            value={draft.membership.paymentHow}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, paymentHow: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Where to pay / turn in
+          <textarea
+            rows={3}
+            value={draft.membership.paymentWhere}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, paymentWhere: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Online form instructions
+          <textarea
+            rows={3}
+            value={draft.membership.formOnline}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, formOnline: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Paper form return instructions
+          <textarea
+            rows={3}
+            value={draft.membership.formReturn}
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, formReturn: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Member expectations (one per line)
+          <textarea
+            rows={5}
+            value={draft.membership.expectations.join("\n")}
+            onChange={(e) =>
+              setField("membership", {
+                ...draft.membership,
+                expectations: e.target.value
+                  .split("\n")
+                  .map((l) => l.trim())
+                  .filter(Boolean),
+              })
+            }
+          />
+        </label>
+        <label>
+          Join steps (one per line)
+          <textarea
+            rows={5}
+            value={draft.membership.steps.join("\n")}
+            onChange={(e) =>
+              setField("membership", {
+                ...draft.membership,
+                steps: e.target.value
+                  .split("\n")
+                  .map((l) => l.trim())
+                  .filter(Boolean),
+              })
+            }
+          />
+        </label>
+        <label>
           Creed (one line per sentence)
           <textarea
             rows={8}
@@ -262,6 +353,18 @@ function PersonEditor({
                 onChange={(e) => {
                   const next = [...people]
                   next[index] = { ...person, photo: e.target.value }
+                  onChange(next)
+                }}
+              />
+            </label>
+            <label>
+              Classroom
+              <input
+                value={person.classroom ?? ""}
+                placeholder="MF A206"
+                onChange={(e) => {
+                  const next = [...people]
+                  next[index] = { ...person, classroom: e.target.value }
                   onChange(next)
                 }}
               />

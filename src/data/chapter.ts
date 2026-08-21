@@ -36,16 +36,55 @@ export const chapter = {
   about:
     "Lebanon Trail FCCLA brings Family and Consumer Sciences to life beyond the classroom. Members lead projects, compete across Texas, serve the community, and grow into the kind of leaders families and workplaces need.",
   joinCta:
-    "Want in? Reach out to an officer or advisor, check that you are in an eligible FCS course, and start building skills that last.",
+    "Ready to join? Complete the membership form, pay $55 dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
   eligibilityNote:
-    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Message any officer and we will help you check.",
+    "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   social: {
-    instagram: "",
+    instagram: "https://www.instagram.com/LEBANONTRAILFCCLA/",
     twitter: "https://twitter.com/LTHSfccla",
   },
   contactEmail: "fiszerm@friscoisd.org",
   joinFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSfmf-ZQcecbttkW0AgrN8pgaiVQTpIhbxUN3j_9OI4YJnLSMA/viewform",
+  classrooms: [
+    {
+      code: "MF A206",
+      advisor: "Ms. Michelle Fiszer",
+      email: "fiszerm@friscoisd.org",
+      note: "Visit when available for questions, forms, and dues drop-off",
+    },
+    {
+      code: "KC A204",
+      advisor: "Ms. Kelli Cashion",
+      email: "cashionk@friscoisd.org",
+      note: "Visit when available for questions, forms, and dues drop-off",
+    },
+  ],
+  membership: {
+    duesAmount: "$55 for the 2026-27 membership year",
+    duesDetails:
+      "Membership dues are $55. That covers Texas & National FCCLA affiliation plus Lebanon Trail chapter activities for the year.",
+    paymentHow:
+      "Pay by cash or check. Make checks payable to Lebanon Trail High School and write “FCCLA dues” in the memo line.",
+    paymentWhere:
+      "Turn your $55 dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
+    formOnline:
+      "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors. No print needed for the digital form.",
+    formReturn:
+      "Need a paper form instead? Ask in MF A206 or KC A204, complete it, and return it to either classroom with your dues payment.",
+    expectations: [
+      "Come to chapter meetings listed on the calendar",
+      "Participate in service projects, including Adopurr shelter and advocacy work",
+      "Help with fundraising that supports chapter projects and animal welfare",
+      "If you want to compete or attend State Fair, earn at least 50 approved points in the member portal",
+    ],
+    steps: [
+      "Check that you have taken (or are taking) an eligible FCS course",
+      "Complete the membership form online or on paper",
+      "Pay $55 dues in MF A206 or KC A204",
+      "Show up to meetings, service, and fundraising, then track points in the portal",
+    ],
+  },
   calendar: {
     embedSrc:
       "https://calendar.google.com/calendar/embed?src=c_3256d0abc2a80c0cb79e6947c1ea7c084add498878449b83856b5c9cc1a5cd6e%40group.calendar.google.com&ctz=America%2FChicago",
@@ -168,6 +207,7 @@ export type Person = {
   focus?: string
   email?: string
   photo?: string
+  classroom?: string
 }
 
 export const officers: Person[] = [
@@ -245,18 +285,20 @@ export const advisors: Person[] = [
   {
     name: "Michelle Fiszer",
     role: "Chapter Advisor",
-    bio: "",
-    focus: "FCS Teacher",
+    bio: "Visit MF A206 when available for membership questions, forms, and dues.",
+    focus: "FCS Teacher · MF A206",
     email: "fiszerm@friscoisd.org",
     photo: "/team/advisor-michelle-fiszer.png",
+    classroom: "MF A206",
   },
   {
     name: "Kelli Cashion",
     role: "Chapter Advisor",
-    bio: "",
-    focus: "FCS Teacher",
+    bio: "Visit KC A204 when available for membership questions, forms, and dues.",
+    focus: "FCS Teacher · KC A204",
     email: "cashionk@friscoisd.org",
     photo: "/team/advisor-kelli-cashion.png",
+    classroom: "KC A204",
   },
 ]
 
@@ -662,35 +704,50 @@ export const coreServiceProject: ServiceEvent = {
   featured: true,
   image: "/projects/adopurr.png",
   description:
-    "Adopurr is Lebanon Trail FCCLA's core community service project for 2026-27. Focused on animal welfare, Adopurr promotes responsible care and helps more animals find loving adoptive homes.",
-  impact: "Animal welfare, care education, and adoption advocacy",
+    "Adopurr is Lebanon Trail FCCLA's core community service project for 2026-27. Members volunteer at local shelters, raise funds for sterilization, advocate for animal welfare, and earn points toward competing and the State Fair.",
+  impact: "Shelter service hours, adoption advocacy, and animal welfare fundraising",
 }
 
 export const communityService: ServiceEvent[] = [
   coreServiceProject,
   {
-    title: "Adopurr Awareness Drive",
-    date: "Fall 2026",
-    status: "upcoming",
+    title: "Monthly Shelter Visits",
+    date: "Ongoing 2026-27",
+    status: "ongoing",
     description:
-      "Campus and community outreach to teach pet care basics and spotlight local adoption opportunities.",
-    impact: "Education + adoption visibility",
+      "Volunteer at any local animal shelter or rescue for care shifts and adoption-floor support. Bring a supervisor signature or confirmation email. Service hours available.",
+    impact: "Direct animal care + service hours",
   },
   {
-    title: "Supply & Care Collection",
+    title: "Adopurr Outreach & Fundraising",
+    date: "Fall-Spring 2026-27",
+    status: "upcoming",
+    description:
+      "Flyers, social posts, and cold emails to raise money for sterilization and promote animal care across North Texas shelters.",
+    impact: "Funds + community awareness",
+  },
+  {
+    title: "Dog Toy Making Event",
     date: "Winter 2026-27",
     status: "upcoming",
     description:
-      "Collect food, toys, blankets, and care items for partner shelters and rescue groups supporting Adopurr.",
-    impact: "Direct support for animals in care",
+      "Chapter work night building enrichment toys for shelter dogs partnered with Adopurr.",
+    impact: "Hands-on support for animals in care",
   },
   {
-    title: "Adoption Story Spotlight",
-    date: "Spring 2027",
+    title: "Emerson × Lebanon Trail Connect",
+    date: "2026-27",
     status: "upcoming",
     description:
-      "Share success stories from Adopurr partners to inspire families to adopt and care well for pets.",
-    impact: "Community storytelling for animal welfare",
+      "Cross-chapter collaboration focused on cultural promotion and connecting FCCLA communities.",
+    impact: "Campus + chapter partnership",
+  },
+  {
+    title: "Plano × Lebanon Trail Stand Up",
+    date: "2026-27",
+    status: "upcoming",
+    description: "Joint Stand Up chapter project with Plano FCCLA.",
+    impact: "Collaborative service leadership",
   },
 ]
 
@@ -698,12 +755,17 @@ export const importantDetails = [
   {
     label: "Who can join",
     value:
-      "Students who take (or have taken) an eligible FCS course at any point in their high school years. If you are unsure, contact any officer to confirm eligibility.",
+      "Students who take (or have taken) an eligible FCS course at any point in their high school years. If you are unsure, stop by MF A206 or KC A204 to confirm eligibility.",
   },
   {
     label: "What we do",
     value:
-      "STAR Events, community service (led by Adopurr in 2026-27), leadership conferences, and chapter projects with family at the center.",
+      "STAR Events, community service (led by Adopurr in 2026-27), leadership conferences, fundraising, and chapter projects with family at the center.",
+  },
+  {
+    label: "Where to find us",
+    value:
+      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Bring membership forms and dues to either room. Follow us on Instagram @LEBANONTRAILFCCLA.",
   },
   {
     label: "Our marks",
@@ -721,17 +783,32 @@ export const faqs = [
   {
     question: "Who can join Lebanon Trail FCCLA?",
     answer:
-      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, ask any officer or advisor.",
+      "Students who are enrolled in an eligible FCS course, or who have taken one at any point in high school. If you are unsure, email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   },
   {
     question: "How do I join?",
     answer:
-      "Fill out the chapter membership form on the Join page, then talk with an officer or advisor about meetings and dues.",
+      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay $55 dues in MF A206 or KC A204, and plan to attend meetings, service projects, and fundraising.",
   },
   {
-    question: "Are there dues?",
+    question: "How much are dues and how do I pay?",
     answer:
-      "Yes. Membership dues help cover affiliation and chapter activities. Ask an advisor or officer for the current amount and payment details for this year.",
+      "Membership dues are $55 for the 2026-27 year. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to MF A206 or KC A204 when an advisor is available.",
+  },
+  {
+    question: "What is expected of members?",
+    answer:
+      "Come to chapter meetings, participate in service projects (including Adopurr), and help with fundraising. Members who want to compete or attend State Fair also need at least 50 approved points in the member portal.",
+  },
+  {
+    question: "Where do I submit forms?",
+    answer:
+      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204 with your dues payment when an advisor is available.",
+  },
+  {
+    question: "Who should I contact with questions?",
+    answer:
+      "Email an officer from the Officers page, or visit Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 at any point in the day if they are available.",
   },
   {
     question: "Do I have to compete?",
@@ -741,7 +818,12 @@ export const faqs = [
   {
     question: "What is Adopurr?",
     answer:
-      "Adopurr is our 2026-27 core service project focused on animal welfare, responsible care, and adoption advocacy.",
+      "Adopurr is our 2026-27 core service project focused on animal welfare, shelter volunteering, sterilization fundraising, and adoption advocacy. See the Adopurr page for the full flow and partner shelters.",
+  },
+  {
+    question: "How do points work for competing and State Fair?",
+    answer:
+      "Members log completed activities in the Member Portal. Officers and advisors approve honest claims. You need at least 50 approved points to compete and to attend the State Fair.",
   },
   {
     question: "When does the chapter meet?",

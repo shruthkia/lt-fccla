@@ -6,8 +6,13 @@ type RevealProps = {
   delay?: number
 }
 
-export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  as: Tag = "div",
+}: RevealProps & { as?: "div" | "li" | "article" | "section" }) {
+  const ref = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -28,12 +33,12 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
   }, [])
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as never}
       className={`reveal ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </div>
+    </Tag>
   )
 }

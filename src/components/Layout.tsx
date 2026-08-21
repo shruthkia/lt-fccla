@@ -16,8 +16,11 @@ export function Layout() {
     <ThemeProvider>
       <SiteContentProvider>
         <div className="app-shell">
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
           <Nav />
-          <main>
+          <main id="main-content" tabIndex={-1}>
             <Outlet />
           </main>
           <Footer />

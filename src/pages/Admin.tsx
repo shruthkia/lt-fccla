@@ -34,8 +34,15 @@ import {
   fetchProgramItems,
   updateProgramItem,
 } from "../lib/program"
+import {
+  fetchAllClaimsForAdmin,
+  fetchMemberPointSummary,
+  formatPointsError,
+  reviewPointClaim,
+} from "../lib/points"
 import { formatPostDate } from "../lib/markdown"
 import { getSupabase, isSupabaseConfigured } from "../lib/supabase"
+import { POINTS_TO_COMPETE } from "../data/points"
 
 type Tab =
   | "chapter"
@@ -50,6 +57,7 @@ type Tab =
   | "posts"
   | "gallery"
   | "program"
+  | "points"
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "chapter", label: "Chapter" },
@@ -64,6 +72,7 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "posts", label: "Blog" },
   { id: "gallery", label: "Gallery" },
   { id: "program", label: "Program of Work" },
+  { id: "points", label: "Points" },
 ]
 
 type PostForm = {
@@ -126,7 +135,7 @@ function AdminHero() {
         </h1>
         <p className="page-lede">
           Edit every public page: chapter copy, team, FAQ, service, records, compete tracks,
-          pathways, blog, gallery, and Program of Work.
+          pathways, blog, gallery, Program of Work, and member point approvals.
         </p>
       </Reveal>
     </header>
@@ -263,6 +272,7 @@ function AdminWorkspace({ email, onSignOut }: { email: string; onSignOut: () => 
       {tab === "posts" && <PostsPanel />}
       {tab === "gallery" && <GalleryPanel />}
       {tab === "program" && <ProgramPanel />}
+      {tab === "points" && <PointsPanel />}
     </section>
   )
 }
@@ -710,6 +720,131 @@ function ProgramPanel() {
             </div>
           </article>
         ))}
+      </div>
+    </div>
+  )
+}
+
+function PointsPanel() {
+  const [claims, setClaims] = useState<Awaited<ReturnType<typeof fetchAllClaimsForAdmin>>>([])
+  const [summary, setSummary] = useState<Awaited<ReturnType<typeof fetchMemberPointSummary>>>([])
+  const [message, setMessage] = useState<string | null>(null)
+  const [filter, setFilter] = useState<"pending" | "all">("pending")
+
+  async function reload() {
+    try {
+      const [allClaims, memberSummary] = await Promise.all([
+        fetchAllClaimsForAdmin(),
+        fetchMemberPointSummary(),
+      ])
+      setClaims(allClaims)
+      setSummary(memberSummary)
+      setMessage(null)
+    } catch (err: unknown) {
+      setMessage(formatPointsError(err))
+    }
+  }
+
+  useEffect(() => {
+    void reload()
+  }, [])
+
+  async function onReview(id: string, status: "approved" | "denied") {
+    const supabase = getSupabase()
+    const {
+      data: { user },
+    } = supabase ? await supabase.auth.getUser() : { data: { user: null } }
+    try {
+      await reviewPointClaim(id, status, user?.id ?? null)
+      setMessage(status === "approved" ? "Claim approved." : "Claim denied.")
+      await reload()
+    } catch (err: unknown) {
+      setMessage(formatPointsError(err))
+    }
+  }
+
+  const visible = filter === "pending" ? claims.filter((c) => c.status === "pending") : claims
+
+  return (
+    <div>
+      <div className="blog-admin-bar">
+        <h2>Member points</h2>
+        <div className="blog-admin-row-actions">
+          <button
+            type="button"
+            className={`btn ${filter === "pending" ? "btn-primary" : "btn-ghost"}`}
+            onClick={() => setFilter("pending")}
+          >
+            Pending
+          </button>
+          <button
+            type="button"
+            className={`btn ${filter === "all" ? "btn-primary" : "btn-ghost"}`}
+            onClick={() => setFilter("all")}
+          >
+            All claims
+          </button>
+        </div>
+      </div>
+      <p className="portal-help">
+        Members need {POINTS_TO_COMPETE}+ approved points to compete and attend State Fair. Approve
+        only activities they actually completed. Custom claims should match chapter standards;
+        shelter visits need a supervisor signature or confirmation email.
+      </p>
+      {message && <p className="blog-admin-message">{message}</p>}
+
+      <div className="portal-admin-summary">
+        {summary.map((row) => (
+          <article key={row.member_name} className="portal-admin-member">
+            <strong>{row.member_name}</strong>
+            <span>
+              {row.approved} approved
+              {row.pending > 0 ? ` · ${row.pending} pending` : ""}
+            </span>
+            <em>{row.approved >= POINTS_TO_COMPETE ? "Eligible" : "Building points"}</em>
+          </article>
+        ))}
+        {summary.length === 0 && <p className="portal-help">No member claims yet.</p>}
+      </div>
+
+      <div className="blog-admin-table">
+        {visible.map((claim) => (
+          <article key={claim.id} className="blog-admin-row">
+            <div>
+              <p className="blog-admin-status">
+                {claim.status} · +{claim.points} pts · {formatPostDate(claim.created_at)}
+              </p>
+              <h3>
+                {claim.member_name} · {claim.activity_label}
+                {claim.activity_key === "custom" ? " (custom)" : ""}
+              </h3>
+              {claim.note && <p>{claim.note}</p>}
+            </div>
+            {claim.status === "pending" && (
+              <div className="blog-admin-row-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => void onReview(claim.id, "approved")}
+                >
+                  Approve
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => void onReview(claim.id, "denied")}
+                >
+                  Deny
+                </button>
+              </div>
+            )}
+          </article>
+        ))}
+        {visible.length === 0 && (
+          <p className="portal-help">
+            {filter === "pending" ? "No pending claims right now." : "No claims yet."}
+          </p>
+        )}
       </div>
     </div>
   )

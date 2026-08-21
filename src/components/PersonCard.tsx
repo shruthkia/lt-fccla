@@ -48,6 +48,11 @@ export function PersonCard({ person, index, variant = "officer" }: PersonCardPro
       <p className="person-role">{person.role}</p>
       <h3>{person.name}</h3>
       {person.focus && <p className="person-focus">{person.focus}</p>}
+      {person.classroom && (
+        <p className="person-classroom">
+          Classroom <strong>{person.classroom}</strong>
+        </p>
+      )}
       {person.bio ? <p>{person.bio}</p> : null}
       {person.email && (
         <a className="person-email" href={`mailto:${person.email}`}>

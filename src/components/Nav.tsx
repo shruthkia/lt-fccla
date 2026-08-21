@@ -8,6 +8,8 @@ type NavItem = {
   to: string
   label: string
   end?: boolean
+  /** Shown as the first dropdown row so the parent page stays discoverable. */
+  overviewLabel?: string
   children?: NavChild[]
 }
 
@@ -17,13 +19,18 @@ const navItems: NavItem[] = [
   {
     to: "/community-service",
     label: "Service",
-    children: [{ to: "/program-of-work", label: "Program of Work" }],
+    overviewLabel: "Service overview",
+    children: [
+      { to: "/adopurr", label: "Adopurr" },
+      { to: "/program-of-work", label: "Program of Work" },
+    ],
   },
   { to: "/calendar", label: "Calendar" },
   { to: "/competitive-events", label: "Compete" },
   {
     to: "/records",
     label: "Records",
+    overviewLabel: "Records board",
     children: [
       { to: "/gallery", label: "Gallery" },
       { to: "/blog", label: "Blog" },
@@ -33,8 +40,8 @@ const navItems: NavItem[] = [
   {
     to: "/faq",
     label: "More",
+    overviewLabel: "FAQ",
     children: [
-      { to: "/faq", label: "FAQ" },
       { to: "/search", label: "Search" },
       { to: "/sitemap", label: "Sitemap" },
     ],
@@ -50,6 +57,31 @@ function NavDropdown({
 }) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
+  const closeTimer = useRef<number | null>(null)
+
+  function clearCloseTimer() {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+  }
+
+  function openMenu() {
+    clearCloseTimer()
+    setOpen(true)
+  }
+
+  function scheduleClose() {
+    clearCloseTimer()
+    closeTimer.current = window.setTimeout(() => {
+      setOpen(false)
+      closeTimer.current = null
+    }, 320)
+  }
+
+  useEffect(() => {
+    return () => clearCloseTimer()
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -68,20 +100,27 @@ function NavDropdown({
   }, [open])
 
   const isMore = item.label === "More"
+  const panelItems: NavChild[] = [
+    { to: item.to, label: item.overviewLabel ?? item.label },
+    ...(item.children ?? []),
+  ]
 
   return (
     <div
       className={`nav-dropdown ${open ? "is-open" : ""}`}
       ref={ref}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={openMenu}
+      onMouseLeave={scheduleClose}
     >
       {isMore ? (
         <button
           type="button"
           className="nav-dropdown-trigger"
           aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            clearCloseTimer()
+            setOpen((v) => !v)
+          }}
         >
           {item.label}
           <span aria-hidden="true">▾</span>
@@ -92,6 +131,7 @@ function NavDropdown({
             to={item.to}
             className={({ isActive }) => (isActive ? "is-active" : undefined)}
             onClick={() => {
+              clearCloseTimer()
               setOpen(false)
               onNavigate()
             }}
@@ -103,20 +143,25 @@ function NavDropdown({
             className="nav-dropdown-caret"
             aria-label={`${item.label} menu`}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              clearCloseTimer()
+              setOpen((v) => !v)
+            }}
           >
             <span aria-hidden="true">▾</span>
           </button>
         </span>
       )}
       <div className="nav-dropdown-panel" role="menu">
-        {item.children!.map((child) => (
+        {panelItems.map((child) => (
           <NavLink
-            key={child.to}
+            key={`${child.to}-${child.label}`}
             to={child.to}
+            end={child.to === item.to}
             role="menuitem"
             className={({ isActive }) => (isActive ? "is-active" : undefined)}
             onClick={() => {
+              clearCloseTimer()
               setOpen(false)
               onNavigate()
             }}
@@ -153,7 +198,7 @@ export function Nav() {
   const closeMenu = () => setOpen(false)
 
   return (
-    <header className={`site-nav ${scrolled ? "is-scrolled" : ""}`}>
+    <header className={`site-nav ${scrolled || open ? "is-scrolled" : ""} ${open ? "is-menu-open" : ""}`}>
       <div className="nav-inner">
         <Link
           to="/"
@@ -198,6 +243,9 @@ export function Nav() {
             <Link to="/join" className="nav-cta nav-cta-login" onClick={closeMenu}>
               Join
             </Link>
+            <Link to="/portal" className="nav-cta nav-cta-login" onClick={closeMenu}>
+              Portal
+            </Link>
             <Link to="/admin" className="nav-cta nav-cta-login" onClick={closeMenu}>
               Officer login
             </Link>
@@ -215,6 +263,9 @@ export function Nav() {
         <div className="nav-tools">
           <Link to="/join" className="nav-cta nav-cta-login nav-cta-desktop">
             Join
+          </Link>
+          <Link to="/portal" className="nav-cta nav-cta-login nav-cta-desktop">
+            Portal
           </Link>
           <Link to="/admin" className="nav-cta nav-cta-login nav-cta-desktop">
             Officer login
@@ -234,8 +285,11 @@ export function Nav() {
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <span />
-            <span />
+            <span className="nav-toggle-label">{open ? "Close" : "Menu"}</span>
+            <span className="nav-toggle-bars" aria-hidden="true">
+              <span />
+              <span />
+            </span>
           </button>
         </div>
       </div>

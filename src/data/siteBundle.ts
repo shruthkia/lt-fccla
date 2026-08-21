@@ -62,7 +62,28 @@ export function mergeSiteBundle(partial: Partial<SiteBundle> | null | undefined)
   const merged: SiteBundle = {
     ...defaultSiteBundle,
     ...(partial ?? {}),
-    chapter: { ...defaultSiteBundle.chapter, ...(partial?.chapter ?? {}) },
+    chapter: {
+      ...defaultSiteBundle.chapter,
+      ...(partial?.chapter ?? {}),
+      social: {
+        ...defaultSiteBundle.chapter.social,
+        ...(partial?.chapter?.social ?? {}),
+      },
+      calendar: {
+        ...defaultSiteBundle.chapter.calendar,
+        ...(partial?.chapter?.calendar ?? {}),
+      },
+      membership: {
+        ...defaultSiteBundle.chapter.membership,
+        ...(partial?.chapter?.membership ?? {}),
+        expectations:
+          partial?.chapter?.membership?.expectations ??
+          defaultSiteBundle.chapter.membership.expectations,
+        steps:
+          partial?.chapter?.membership?.steps ?? defaultSiteBundle.chapter.membership.steps,
+      },
+      classrooms: partial?.chapter?.classrooms ?? defaultSiteBundle.chapter.classrooms,
+    },
   }
   return merged
 }
