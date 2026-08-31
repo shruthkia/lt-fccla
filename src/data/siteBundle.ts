@@ -1,3 +1,4 @@
+import { fallbackPhotoForName, resolvePersonPhoto } from "../lib/personPhoto"
 import {
   advisors,
   buildCompetitionRecords,
@@ -81,9 +82,39 @@ export function mergeSiteBundle(partial: Partial<SiteBundle> | null | undefined)
           defaultSiteBundle.chapter.membership.expectations,
         steps:
           partial?.chapter?.membership?.steps ?? defaultSiteBundle.chapter.membership.steps,
+        paymentUrl:
+          partial?.chapter?.membership?.paymentUrl ??
+          defaultSiteBundle.chapter.membership.paymentUrl,
       },
       classrooms: partial?.chapter?.classrooms ?? defaultSiteBundle.chapter.classrooms,
     },
+  }
+  merged.officers = withResolvedPhotos(merged.officers, defaultSiteBundle.officers)
+  merged.advisors = withResolvedPhotos(merged.advisors, defaultSiteBundle.advisors)
+  merged.faqs = mergeFaqs(merged.faqs, defaultSiteBundle.faqs)
+  return merged
+}
+
+function withResolvedPhotos(people: Person[], defaults: Person[]): Person[] {
+  return people.map((person) => ({
+    ...person,
+    photo: resolvePersonPhoto(person.photo, fallbackPhotoForName(person.name, defaults)),
+  }))
+}
+
+function mergeFaqs(cms: FaqItem[], defaults: FaqItem[]): FaqItem[] {
+  const defaultsByQuestion = new Map(defaults.map((item) => [item.question, item]))
+  const seen = new Set<string>()
+  const merged = cms.map((item) => {
+    seen.add(item.question)
+    const fallback = defaultsByQuestion.get(item.question)
+    if (fallback && (/\$55/.test(item.answer) || /October 7/.test(fallback.answer))) {
+      return fallback
+    }
+    return item
+  })
+  for (const item of defaults) {
+    if (!seen.has(item.question)) merged.push(item)
   }
   return merged
 }

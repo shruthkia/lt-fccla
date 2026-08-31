@@ -29,9 +29,9 @@ export const yearPlanEvents: YearPlanItem[] = [
   },
   {
     title: "State Fair",
-    timeframe: "October (tentative)",
+    timeframe: "October 7",
     description:
-      "Chapter trip and competition pathway. Members need enough approved portal points to compete and attend.",
+      "Chapter trip on October 7. Members need at least 50 approved portal points to compete and attend.",
     status: "planned",
   },
   {

@@ -36,7 +36,7 @@ export const chapter = {
   about:
     "Lebanon Trail FCCLA brings Family and Consumer Sciences to life beyond the classroom. Members lead projects, compete across Texas, serve the community, and grow into the kind of leaders families and workplaces need.",
   joinCta:
-    "Ready to join? Complete the membership form, pay $55 dues in MF A206 or KC A204, and plan to attend meetings, help with service projects, and support fundraising.",
+    "Ready to join? Complete the membership form, pay $40 dues on OnlineSchoolFees, and plan to attend meetings, help with service projects, and support fundraising.",
   eligibilityNote:
     "You can join if you are enrolled in an eligible FCS course, or if you have taken one at any point in high school. Not sure you qualify? Email an officer, or visit MF A206 or KC A204 at any point in the day if an advisor is available.",
   social: {
@@ -51,37 +51,38 @@ export const chapter = {
       code: "MF A206",
       advisor: "Ms. Michelle Fiszer",
       email: "fiszerm@friscoisd.org",
-      note: "Visit when available for questions, forms, and dues drop-off",
+      note: "Visit when available for questions and membership forms",
     },
     {
       code: "KC A204",
       advisor: "Ms. Kelli Cashion",
       email: "cashionk@friscoisd.org",
-      note: "Visit when available for questions, forms, and dues drop-off",
+      note: "Visit when available for questions and membership forms",
     },
   ],
   membership: {
-    duesAmount: "$55 for the 2026-27 membership year",
+    duesAmount: "$40 for the 2026-27 membership year",
     duesDetails:
-      "Membership dues are $55. That covers Texas & National FCCLA affiliation plus Lebanon Trail chapter activities for the year.",
+      "Membership dues are $40. That covers Texas & National FCCLA affiliation plus Lebanon Trail chapter activities for the year.",
     paymentHow:
-      "Pay by cash or check. Make checks payable to Lebanon Trail High School and write “FCCLA dues” in the memo line.",
+      "Pay online through Frisco ISD OnlineSchoolFees with a credit/debit card or electronic check.",
     paymentWhere:
-      "Turn your $55 dues in to Ms. Fiszer in MF A206 or Ms. Cashion in KC A204 during school hours. Bring payment with your completed form when possible.",
+      "Log in at onlineschoolfees.com, add your student, and pay the Lebanon Trail FCCLA membership fee. If the fee is not listed yet, visit MF A206 or KC A204 and an advisor can help.",
+    paymentUrl: "https://www.onlineschoolfees.com/",
     formOnline:
       "Fill out the official membership Google Form on this page (or open it in a new tab). Online submissions go straight to advisors. No print needed for the digital form.",
     formReturn:
-      "Need a paper form instead? Ask in MF A206 or KC A204, complete it, and return it to either classroom with your dues payment.",
+      "Need a paper form instead? Ask in MF A206 or KC A204, complete it, and return it to either classroom. Pay dues separately on OnlineSchoolFees.",
     expectations: [
       "Come to chapter meetings listed on the calendar",
       "Participate in service projects, including Adopurr shelter and advocacy work",
       "Help with fundraising that supports chapter projects and animal welfare",
-      "If you want to compete or attend State Fair, earn at least 50 approved points in the member portal",
+      "If you want to compete or attend State Fair on October 7, earn at least 50 approved points in the member portal",
     ],
     steps: [
       "Check that you have taken (or are taking) an eligible FCS course",
       "Complete the membership form online or on paper",
-      "Pay $55 dues in MF A206 or KC A204",
+      "Pay $40 dues on OnlineSchoolFees",
       "Show up to meetings, service, and fundraising, then track points in the portal",
     ],
   },
@@ -285,7 +286,7 @@ export const advisors: Person[] = [
   {
     name: "Michelle Fiszer",
     role: "Chapter Advisor",
-    bio: "Visit MF A206 when available for membership questions, forms, and dues.",
+    bio: "Visit MF A206 when available for membership questions and forms.",
     focus: "FCS Teacher · MF A206",
     email: "fiszerm@friscoisd.org",
     photo: "/team/advisor-michelle-fiszer.png",
@@ -294,7 +295,7 @@ export const advisors: Person[] = [
   {
     name: "Kelli Cashion",
     role: "Chapter Advisor",
-    bio: "Visit KC A204 when available for membership questions, forms, and dues.",
+    bio: "Visit KC A204 when available for membership questions and forms.",
     focus: "FCS Teacher · KC A204",
     email: "cashionk@friscoisd.org",
     photo: "/team/advisor-kelli-cashion.png",
@@ -765,7 +766,7 @@ export const importantDetails = [
   {
     label: "Where to find us",
     value:
-      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Bring membership forms and dues to either room. Follow us on Instagram @LEBANONTRAILFCCLA.",
+      "Email an officer with questions, or visit advisors in MF A206 (Ms. Fiszer) or KC A204 (Ms. Cashion) at any point in the day if they are available. Pay $40 dues on OnlineSchoolFees. Follow us on Instagram @LEBANONTRAILFCCLA.",
   },
   {
     label: "Our marks",
@@ -788,12 +789,12 @@ export const faqs = [
   {
     question: "How do I join?",
     answer:
-      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay $55 dues in MF A206 or KC A204, and plan to attend meetings, service projects, and fundraising.",
+      "Complete the membership form on the Join page (online Google Form or paper from an advisor classroom), pay $40 dues on OnlineSchoolFees, and plan to attend meetings, service projects, and fundraising.",
   },
   {
     question: "How much are dues and how do I pay?",
     answer:
-      "Membership dues are $55 for the 2026-27 year. Pay by cash or check payable to Lebanon Trail High School with “FCCLA dues” in the memo, turned in to MF A206 or KC A204 when an advisor is available.",
+      "Membership dues are $40 for the 2026-27 year. Pay online at OnlineSchoolFees (onlineschoolfees.com). If the FCCLA fee does not show on your account yet, visit MF A206 or KC A204 and an advisor can help.",
   },
   {
     question: "What is expected of members?",
@@ -803,7 +804,7 @@ export const faqs = [
   {
     question: "Where do I submit forms?",
     answer:
-      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204 with your dues payment when an advisor is available.",
+      "Submit the Google Form online from the Join page, or return a paper form to MF A206 or KC A204. Pay $40 dues on OnlineSchoolFees.",
   },
   {
     question: "Who should I contact with questions?",
@@ -823,7 +824,12 @@ export const faqs = [
   {
     question: "How do points work for competing and State Fair?",
     answer:
-      "Members log completed activities in the Member Portal. Officers and advisors approve honest claims. You need at least 50 approved points to compete and to attend the State Fair.",
+      "Members log completed activities in the Member Portal. Officers and advisors approve honest claims. You need at least 50 approved points to compete and to attend the State Fair on October 7.",
+  },
+  {
+    question: "When is State Fair?",
+    answer:
+      "State Fair is October 7. Members who want to attend need at least 50 approved points in the member portal.",
   },
   {
     question: "When does the chapter meet?",
