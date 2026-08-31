@@ -72,9 +72,9 @@ const pageIndex: SearchEntry[] = [
   {
     title: "Join",
     path: "/join",
-    blurb: "Membership form, dues, payment, expectations, and advisor classrooms.",
+    blurb: "Membership form, $40 dues on OnlineSchoolFees, expectations, and advisor classrooms.",
     keywords:
-      "join membership dues pay form eligible courses meetings service fundraising A206 A204 fiszer cashion",
+      "join membership dues pay form onlineschoolfees eligible courses meetings service fundraising A206 A204 fiszer cashion",
   },
   {
     title: "Program of Work",

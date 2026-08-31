@@ -131,7 +131,7 @@ export function Portal() {
           <p className="page-lede">
             Type your name, check the activities you completed, or add a custom activity for review.
             Shelter shifts need a supervisor signature or confirmation email. You need at least{" "}
-            {POINTS_TO_COMPETE} approved points to compete and to go to the State Fair.
+            {POINTS_TO_COMPETE} approved points to compete and to go to the State Fair on October 7.
           </p>
         </Reveal>
       </header>

@@ -17,7 +17,7 @@ export function CompetitiveEvents() {
           <p className="page-lede">
             STAR Events, Online STAR, FCSAs, Skill Demos, Spotlight on Projects, Knowledge Bowl,
             Virtual Business Challenge, Challenge Tests, and National Program Awards. Members need
-            50+ approved portal points to compete and to attend the State Fair.
+            50+ approved portal points to compete and to attend the State Fair on October 7.
           </p>
         </Reveal>
       </header>

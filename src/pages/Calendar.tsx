@@ -14,8 +14,8 @@ export function CalendarPage() {
             <span className="text-red">the calendar.</span>
           </h1>
           <p className="page-lede">
-            Meetings, conferences, service projects, and competition deadlines, powered by our
-            public Google Calendar (America/Chicago).
+            Meetings, conferences, service projects, the State Fair on October 7, and competition
+            deadlines, powered by our public Google Calendar (America/Chicago).
           </p>
         </Reveal>
       </header>

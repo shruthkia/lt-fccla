@@ -2213,6 +2213,13 @@ html[data-theme="dark"] .hero-bg::after {
   line-height: 1.5;
 }
 
+.field-hint {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .blog-check {
   display: flex !important;
   align-items: center;
@@ -2493,6 +2500,11 @@ html[data-theme="dark"] .hero-bg::after {
   font-size: clamp(1.35rem, 3vw, 1.85rem);
   color: var(--ink) !important;
   line-height: 1.15;
+}
+
+.join-info-card .btn {
+  margin-top: 0.35rem;
+  justify-self: start;
 }
 
 .join-contact-card .text-link {

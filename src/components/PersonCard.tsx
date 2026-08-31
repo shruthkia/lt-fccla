@@ -1,5 +1,6 @@
 import { useState } from "react"
 import type { Person } from "../data/chapter"
+import { resolvePersonPhoto } from "../lib/personPhoto"
 
 type PersonCardProps = {
   person: Person
@@ -20,7 +21,8 @@ function initials(name: string) {
 
 export function PersonCard({ person, index, variant = "officer" }: PersonCardProps) {
   const [imgFailed, setImgFailed] = useState(false)
-  const showPhoto = Boolean(person.photo) && !imgFailed
+  const photoSrc = resolvePersonPhoto(person.photo)
+  const showPhoto = Boolean(photoSrc) && !imgFailed
   const isPending = person.name === "Coming soon"
 
   return (
@@ -28,7 +30,7 @@ export function PersonCard({ person, index, variant = "officer" }: PersonCardPro
       <div className="person-photo-wrap">
         {showPhoto ? (
           <img
-            src={person.photo}
+            src={photoSrc}
             alt={`${person.name}, ${person.role}`}
             className="person-photo"
             onError={() => setImgFailed(true)}

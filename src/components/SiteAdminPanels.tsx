@@ -176,6 +176,16 @@ export function ChapterSitePanel() {
           />
         </label>
         <label>
+          Payment link
+          <input
+            value={draft.membership.paymentUrl ?? ""}
+            placeholder="https://www.onlineschoolfees.com/"
+            onChange={(e) =>
+              setField("membership", { ...draft.membership, paymentUrl: e.target.value })
+            }
+          />
+        </label>
+        <label>
           Online form instructions
           <textarea
             rows={3}
@@ -350,12 +360,17 @@ function PersonEditor({
               Photo path or URL
               <input
                 value={person.photo ?? ""}
+                placeholder="/team/name.jpg"
                 onChange={(e) => {
                   const next = [...people]
                   next[index] = { ...person, photo: e.target.value }
                   onChange(next)
                 }}
               />
+              <span className="field-hint">
+                Prefer a file in public/team, such as /team/shruthika-omkumar.jpg. A Google Drive
+                share/view link is a web page, not an image file, so paste those only if needed.
+              </span>
             </label>
             <label>
               Classroom

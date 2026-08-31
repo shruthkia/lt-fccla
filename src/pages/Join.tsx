@@ -81,6 +81,17 @@ export function Join() {
               <h3>How to pay</h3>
               <p>{membership.paymentHow}</p>
               <p>{membership.paymentWhere}</p>
+              {membership.paymentUrl && (
+                <a
+                  className="btn btn-primary"
+                  href={membership.paymentUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Pay on OnlineSchoolFees
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              )}
             </article>
           </Reveal>
         </div>
@@ -141,7 +152,7 @@ export function Join() {
             <h2 id="join-contact-heading">Contact & classrooms</h2>
             <p className="section-note">
               Email an officer with questions, or visit an advisor in MF A206 or KC A204 at any
-              point in the day if they are available. Bring forms and dues to either room.
+              point in the day if they are available. Pay $40 dues on OnlineSchoolFees.
             </p>
           </div>
         </Reveal>
